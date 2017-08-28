@@ -5,7 +5,9 @@ all: build run logs
 build:
 	docker build -t $(TAG) .
 
-run:
+run: .reactiondev.cid
+
+.reactiondev.cid:
 	docker run --name reactiondev \
 		-p 3000:3000 \
 		--cidfile=.reactiondev.cid \
