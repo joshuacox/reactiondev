@@ -8,7 +8,7 @@ build:
 run:
 	docker run --name reactiondev \
 		-p 3000:3000 \
-		--cidfile=.reactiondev.cid
+		--cidfile=.reactiondev.cid \
 		-v $(HOME)/.ssh:/home/reaction/.ssh \
 		joshuacox/reactiondev
 
@@ -16,7 +16,6 @@ enter:
 	docker exec -it \
 		`cat .reactiondev.cid` \
 		/bin/bash
-
 
 logs:
 	docker logs -f `cat .reactiondev.cid`
