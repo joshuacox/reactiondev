@@ -15,13 +15,15 @@ RUN apk update && apk upgrade \
 RUN curl https://install.meteor.com/ | sh
 RUN cp "/root/.meteor/packages/meteor-tool/1.5.1/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor
 RUN npm i -g reaction-cli
-RUN mv /root/.meteor /home/reaction/; chown -R reaction:reaction /home/reaction
+#RUN mv /root/.meteor /home/reaction/; chown -R reaction:reaction /home/reaction
 
-USER reaction
 WORKDIR /home/reaction
 
+#RUN ls -lh /home/reaction/.meteor/packages/meteor-tool/.1.5.1.puot9a++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/bin/node
 RUN reaction init
 
+RUN chown -R reaction:reaction /home/reaction
 WORKDIR /home/reaction/reaction
+USER reaction
 
 CMD [ "reaction" ]
