@@ -12,9 +12,11 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && echo 'en_US.UTF-8 UTF-8'>>/etc/locale.gen \
   && locale-gen \
   && echo '%sudo ALL=(ALL) NOPASSWD:ALL'>> /etc/sudoers \
+  && gpasswd -a node sudo \
   && apt-get -y autoremove \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
+
 
 USER node
 WORKDIR /home/node
