@@ -5,6 +5,9 @@ all: build run logs
 build:
 	docker build -t $(TAG) .
 
+pull:
+	docker pull $(TAG)
+
 run: .reactiondev.cid
 
 .reactiondev.cid:
