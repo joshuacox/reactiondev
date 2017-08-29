@@ -32,4 +32,5 @@ clean:
 	rm -f .reactiondev.cid
 
 ps:
+	-@sleep 2
 	docker ps|grep reactiondev
