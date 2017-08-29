@@ -4,6 +4,21 @@ A simple dockerized [reaction commerce](https://reactioncommerce.com/) dev envir
 
 ### Usage
 
+`docker pull joshuacox/reactiondev`  and then run it with something like
+
+```
+docker run --name reactiondev \
+	-d \
+	-p 3000:3000 \
+	--cidfile=.reactiondev.cid \
+	-v $(HOME)/.ssh:/home/reaction/.ssh \
+	joshuacox/reactiondev
+```
+
+### Makefile
+
+A makefile is included in the git repo because I'm a lazy typist
+
 `make build` to build it
 
 `make run` to run it
