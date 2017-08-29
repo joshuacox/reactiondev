@@ -12,6 +12,7 @@ run: .reactiondev.cid
 
 .reactiondev.cid:
 	docker run --name reactiondev \
+		-d \
 		-p 3000:3000 \
 		--cidfile=.reactiondev.cid \
 		-v $(HOME)/.ssh:/home/reaction/.ssh \
