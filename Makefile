@@ -1,6 +1,6 @@
 TAG:=joshuacox/reactiondev
 
-all: build run logs
+all: build run ps
 
 build:
 	docker build -t $(TAG) .
@@ -29,3 +29,6 @@ clean:
 	docker stop `cat .reactiondev.cid`
 	docker rm `cat .reactiondev.cid`
 	rm -f .reactiondev.cid
+
+ps:
+	docker ps|grep reactiondev
