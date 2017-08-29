@@ -1,6 +1,6 @@
 TAG:=joshuacox/reactiondev
 
-all: build run logs
+all: build run
 
 build:
 	docker build -t $(TAG) .
