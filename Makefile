@@ -10,12 +10,20 @@ pull:
 
 run: .reactiondev.cid
 
-.reactiondev.cid:
+.reactiondev.cid: PORT
+	$(eval PORT := $(shell cat PORT))
 	docker run --name reactiondev \
 		-d \
-		-p 3000:3000 \
+		-p $(PORT):3000 \
 		--cidfile=.reactiondev.cid \
-		-v $(HOME)/.ssh:/home/reaction/.ssh \
+		-v $(HOME):/home/node \
+		joshuacox/reactiondev
+
+demo:
+	docker run --name reactiondev \
+		-d \
+		-p 3003:3000 \
+		--cidfile=.reactiondev.cid \
 		joshuacox/reactiondev
 
 enter:
@@ -34,3 +42,8 @@ clean:
 ps:
 	-@sleep 2
 	docker ps|grep reactiondev
+
+PORT:
+	@while [ -z "$$PORT" ]; do \
+		read -r -p "Enter the port you wish to associate with this container [PORT]: " PORT; echo "$$PORT">>PORT; cat PORT; \
+	done ;

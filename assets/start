@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd $REACTION_ROOT
+
+$1

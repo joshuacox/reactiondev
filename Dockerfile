@@ -1,6 +1,6 @@
 FROM node:8
 
-ENV OCTOSSH_UPDATED=20170828 \
+ENV REACTIONdEV_UPDATED=20170830 \
 BUILD_PACKAGES='git wget curl locales sudo vim'
 
 RUN DEBIAN_FRONTEND=noninteractive \
@@ -17,9 +17,10 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
 
+RUN chown node:node /opt
 
 USER node
-WORKDIR /home/node
+WORKDIR /opt
 
 RUN curl https://install.meteor.com/ | sh
 RUN sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.1/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor
@@ -32,6 +33,9 @@ RUN sudo npm i -g reaction-cli
 
 RUN /bin/bash -c "reaction init"
 
-WORKDIR /home/node/reaction
+WORKDIR /opt/reaction
+ENV REACTION_ROOT /opt/reaction
 
+COPY assets /assets
+ENTRYPOINT [ "/assets/start" ]
 CMD [ "reaction" ]
