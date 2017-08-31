@@ -1,6 +1,6 @@
 TAG:=joshuacox/reactiondev
 
-all: build run ps
+all: build clean run ps
 
 build:
 	docker build -t $(TAG) .
@@ -10,19 +10,23 @@ pull:
 
 run: .reactiondev.cid
 
-.reactiondev.cid: PORT
+.reactiondev.cid: PORT REACTION_ROOT
 	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
 		--cidfile=.reactiondev.cid \
-		-v $(HOME):/home/node \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev
 
-demo:
+demo: PORT
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
-		-p 3003:3000 \
+		-p $(PORT):3000 \
 		--cidfile=.reactiondev.cid \
 		joshuacox/reactiondev
 
@@ -35,9 +39,9 @@ logs:
 	docker logs -f `cat .reactiondev.cid`
 
 clean:
-	docker stop `cat .reactiondev.cid`
-	docker rm `cat .reactiondev.cid`
-	rm -f .reactiondev.cid
+	-docker stop `cat .reactiondev.cid`
+	-docker rm `cat .reactiondev.cid`
+	-rm -f .reactiondev.cid
 
 ps:
 	-@sleep 2
@@ -46,4 +50,9 @@ ps:
 PORT:
 	@while [ -z "$$PORT" ]; do \
 		read -r -p "Enter the port you wish to associate with this container [PORT]: " PORT; echo "$$PORT">>PORT; cat PORT; \
+	done ;
+
+REACTION_ROOT:
+	@while [ -z "$$REACTION_ROOT" ]; do \
+		read -r -p "Enter the reaction root you wish to associate with this container [REACTION_ROOT]: " REACTION_ROOT; echo "$$REACTION_ROOT">>REACTION_ROOT; cat REACTION_ROOT; \
 	done ;

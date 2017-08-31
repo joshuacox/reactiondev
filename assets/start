@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "REACTION_ROOT='$REACTION_ROOT'"
+
 cd $REACTION_ROOT
 
 $1
