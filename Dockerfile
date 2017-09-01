@@ -19,7 +19,7 @@ RUN sudo npm i -g reaction-cli
 
 WORKDIR /home/node
 
-RUN /bin/bash -c "reaction init"
+#RUN /bin/bash -c "reaction init"
 
 WORKDIR /home/node/reaction
 
