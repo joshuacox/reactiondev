@@ -21,14 +21,12 @@ run: clean .reactiondev.cid
 		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev
 
-demo: PORT
-	$(eval PORT := $(shell cat PORT))
-	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
-	docker run --name reactiondev \
+demo:
+	docker run --name reactiondevdemo \
 		-d \
-		-p $(PORT):3000 \
+		-p 3000:3000 \
 		--cidfile=.reactiondev.cid \
-		joshuacox/reactiondev
+		joshuacox/reactiondev:demo
 
 enter:
 	docker exec -it \
