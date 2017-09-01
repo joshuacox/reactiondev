@@ -1,6 +1,11 @@
 # reactiondev
 
-A simple dockerized [reaction commerce](https://reactioncommerce.com/) dev environment
+  A simple dockerized [reaction commerce](https://reactioncommerce.com/) dev environment, i use many flavors of linux on the same laptop, this gives me a consistent way of starting node to view my edits across them all.
+
+#### Alternative
+
+You can also use [NVM](https://github.com/creationix/nvm) and many other
+ways of managing node versions, this is just one.
 
 ### Usage
 
@@ -21,12 +26,22 @@ A makefile is included in the git repo because I'm a lazy typist
 
 `make build` to build it
 
-`make run` to run it
+`make demo` to run an ephemeral instance for demo purposes (everything
+will be blown away when it is stopped)
+
+`make run` to run it with your local checked out copy of reaction that
+you are modifying live, you will be prompted for the path to this
+reaction directory and the port number you wish to use, after which it will save this location
+
+Your reaction will be availble at http://localhost:PORT where port is
+the one you chose above when you were prompted
+
+Note: to reset the answers to those questions just edit them or
+`rm REACTION_ROOT` or `rm PORT`
+and you will be prompted again, these files are ignored by git
 
 `make logs` and follow the logs, ctrl-C to stop watching the logs
 
-`make enter` to go into the dev environment, which should also be on http://localhost:3000 
-
-while inside you should have your ssh keys mounted in, so you can do things like `git remote add mycustomreaction git@github.com:githhubuser/mycustomreaction` so you can push any changes you make.
+`make enter` to go into the dev environment
 
 `make clean` will stop and remove the container

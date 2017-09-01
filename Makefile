@@ -8,7 +8,7 @@ build:
 pull:
 	docker pull $(TAG)
 
-run: .reactiondev.cid
+run: clean .reactiondev.cid
 
 .reactiondev.cid: PORT REACTION_ROOT
 	$(eval PORT := $(shell cat PORT))
