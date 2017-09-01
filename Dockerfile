@@ -34,7 +34,7 @@ RUN curl https://install.meteor.com/ | sh \
 #USER node
 
 #WORKDIR /opt/reaction
-RUN mkdir -p /home/node/reaction; \
+RUN mkdir -p /home/node/reaction \
   && chown node:node /home/node/reaction
 WORKDIR /home/node/reaction
 
