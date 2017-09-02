@@ -36,7 +36,7 @@ or pass in your own reaction command:
 docker run --name reactiondev -d \
   -p 3002:3000 \
   -v $(REACTION_ROOT):/home/node/reaction \
-  joshuacox/reactiondev
+  joshuacox/reactiondev \
   reaction test
 ```
 
