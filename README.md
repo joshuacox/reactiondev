@@ -21,10 +21,10 @@ I'm using it to test out local reaction development directories as such:
 `docker pull joshuacox/reactiondev`  and then run it with something like
 
 ```
-	docker run --name reactiondev -d \
-    -p 3002:3000 \
-		-v $(REACTION_ROOT):/home/node/reaction \
-		joshuacox/reactiondev
+docker run --name reactiondev -d \
+  -p 3002:3000 \
+  -v $(REACTION_ROOT):/home/node/reaction \
+  joshuacox/reactiondev
 ```
 
 and point your browser to
