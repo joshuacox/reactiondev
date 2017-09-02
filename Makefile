@@ -56,7 +56,7 @@ REACTION_ROOT:
 		read -r -p "Enter the reaction root you wish to associate with this container [REACTION_ROOT]: " REACTION_ROOT; echo "$$REACTION_ROOT">>REACTION_ROOT; cat REACTION_ROOT; \
 	done ;
 
-alpine:
+alpine: clean
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
@@ -67,7 +67,7 @@ alpine:
 		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev:alpine
 
-marketplace:
+marketplace: clean
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
@@ -78,7 +78,7 @@ marketplace:
 		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev:marketplace
 
-node-8:
+node-8: clean
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
@@ -89,7 +89,7 @@ node-8:
 		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev:node-8
 
-node-8.4:
+node-8.4: clean
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
@@ -100,7 +100,7 @@ node-8.4:
 		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev:node-8.4
 
-node-argon:
+node-argon: clean
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
@@ -111,7 +111,7 @@ node-argon:
 		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev:node-argon
 
-node-boron:
+node-boron: clean
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
@@ -122,7 +122,7 @@ node-boron:
 		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev:node-boron
 
-node-onbuild:
+node-onbuild: clean
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
@@ -133,7 +133,7 @@ node-onbuild:
 		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev:node-onbuild
 
-node-slim:
+node-slim: clean
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
@@ -144,7 +144,7 @@ node-slim:
 		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev:node-slim
 
-node-stretch:
+node-stretch: clean
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
@@ -155,7 +155,7 @@ node-stretch:
 		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev:node-stretch
 
-node-wheezy:
+node-wheezy: clean
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
@@ -165,15 +165,3 @@ node-wheezy:
 		-e REACTION_ROOT=/home/node/reaction \
 		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev:node-wheezy
-
-nomongo:
-	$(eval PORT := $(shell cat PORT))
-	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
-	docker run --name reactiondev \
-		-d \
-		-p $(PORT):3000 \
-		--cidfile=.reactiondev.cid \
-		-e REACTION_ROOT=/home/node/reaction \
-		-v $(REACTION_ROOT):/home/node/reaction \
-		joshuacox/reactiondev:nomongo
-

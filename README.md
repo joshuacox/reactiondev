@@ -110,6 +110,17 @@ and you will be prompted again, these files are ignored by git
 
 `make clean` will stop and remove the container
 
+there are also various branches you can test easily with the makefile:
+
+`make node-8`
+`make node-8.4`
+`make node-argon`
+`make node-boron`
+`make node-slim`
+`make node-stretch`
+`make node-wheezy`
+`make node-onbuild`
+
 #### Alternatives
 
 You can also use [NVM](https://github.com/creationix/nvm) and many other
