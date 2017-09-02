@@ -57,6 +57,8 @@ REACTION_ROOT:
 	done ;
 
 alpine:
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
@@ -66,6 +68,8 @@ alpine:
 		joshuacox/reactiondev:alpine
 
 marketplace:
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
@@ -75,6 +79,8 @@ marketplace:
 		joshuacox/reactiondev:marketplace
 
 node-8:
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
@@ -84,6 +90,8 @@ node-8:
 		joshuacox/reactiondev:node-8
 
 node-8.4:
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
@@ -93,6 +101,8 @@ node-8.4:
 		joshuacox/reactiondev:node-8.4
 
 node-argon:
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
@@ -102,6 +112,8 @@ node-argon:
 		joshuacox/reactiondev:node-argon
 
 node-boron:
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
@@ -111,6 +123,8 @@ node-boron:
 		joshuacox/reactiondev:node-boron
 
 node-onbuild:
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
@@ -120,6 +134,8 @@ node-onbuild:
 		joshuacox/reactiondev:node-onbuild
 
 node-slim:
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
@@ -129,6 +145,8 @@ node-slim:
 		joshuacox/reactiondev:node-slim
 
 node-stretch:
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
@@ -138,6 +156,8 @@ node-stretch:
 		joshuacox/reactiondev:node-stretch
 
 node-wheezy:
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
@@ -147,6 +167,8 @@ node-wheezy:
 		joshuacox/reactiondev:node-wheezy
 
 nomongo:
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
