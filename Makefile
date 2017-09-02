@@ -55,3 +55,103 @@ REACTION_ROOT:
 	@while [ -z "$$REACTION_ROOT" ]; do \
 		read -r -p "Enter the reaction root you wish to associate with this container [REACTION_ROOT]: " REACTION_ROOT; echo "$$REACTION_ROOT">>REACTION_ROOT; cat REACTION_ROOT; \
 	done ;
+
+alpine:
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		joshuacox/reactiondev:alpine
+
+marketplace:
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		joshuacox/reactiondev:marketplace
+
+node-8:
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		joshuacox/reactiondev:node-8
+
+node-8.4:
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		joshuacox/reactiondev:node-8.4
+
+node-argon:
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		joshuacox/reactiondev:node-argon
+
+node-boron:
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		joshuacox/reactiondev:node-boron
+
+node-onbuild:
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		joshuacox/reactiondev:node-onbuild
+
+node-slim:
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		joshuacox/reactiondev:node-slim
+
+node-stretch:
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		joshuacox/reactiondev:node-stretch
+
+node-wheezy:
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		joshuacox/reactiondev:node-wheezy
+
+nomongo:
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		joshuacox/reactiondev:nomongo
+
