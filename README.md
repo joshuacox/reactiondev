@@ -44,12 +44,20 @@ v1.3.0
 
 ### Branches
 
-Much like the tags I have a few branches that relate to the upcoming
-marketplace, alpine, and experimental builds, notably:
+Also available in dockerhub as tags, I have a few branches that relate to the upcoming
+marketplace, alpine, different node versions, and experimental builds, notably:
 
 ```
 alpine
 marketplace
+node-8
+node-8.4
+node-boron
+node-argon
+node-onbuild
+node-slim
+node-stretch
+node-wheezy
 ```
 
 ### Makefile
