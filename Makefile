@@ -1,4 +1,4 @@
-TAG:=joshuacox/reactiondev
+TAG:=$(cat TAG)
 
 all: build clean run ps
 
@@ -19,7 +19,7 @@ run: clean .reactiondev.cid
 		--cidfile=.reactiondev.cid \
 		-e REACTION_ROOT=/home/node/reaction \
 		-v $(REACTION_ROOT):/home/node/reaction \
-		joshuacox/reactiondev
+		$(TAG)
 
 demo:
 	docker run --name reactiondevdemo \
