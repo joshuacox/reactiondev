@@ -22,6 +22,21 @@ run: clean .reactiondev.cid
 		-v $(REACTION_ROOT):/home/node/reaction \
 		$(TAG)
 
+test: PORT REACTION_ROOT clean
+	$(eval TAG := $(shell cat TAG))
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
+	$(eval TMP := $(shell mktemp -d --suffix=REACTION_TMP))
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		-v $(TMP):/tmp \
+		$(TAG) \
+		reaction test
+
 demo:
 	docker run --name reactiondevdemo \
 		-d \
