@@ -2,15 +2,27 @@
 
   A simple dockerized [reaction commerce](https://reactioncommerce.com/) dev environment, i use many flavors of linux on the same laptop, this gives me a consistent way of starting node to view my edits across them all.
 
+
+### Demo
+
+For a ephemeral demo instance that will not retain data, and let you
+play around with a default Reaction demo
+
+`docker pull joshuacox/reactiondev:demo`  and then run it with something like
+
+```
+	docker run --name reactiondevdemo -d -p 3001:3000 joshuacox/reactiondev:demo
+```
+
 ### Usage
+
+I'm using it to test out local reaction development directories as such:
 
 `docker pull joshuacox/reactiondev`  and then run it with something like
 
 ```
-	docker run --name reactiondev \
-		-d \
-		-p 3002:3000 \
-		--cidfile=.reactiondev.cid \
+	docker run --name reactiondev -d \
+    -p 3002:3000 \
 		-v $(REACTION_ROOT):/home/node/reaction \
 		joshuacox/reactiondev
 ```
