@@ -1,4 +1,4 @@
-FROM node:boron
+FROM node:argon
 
 ENV REACTIONDEV_UPDATED=20170831 \
   BUILD_PACKAGES='git wget curl locales sudo' \
