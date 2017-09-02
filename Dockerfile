@@ -2,7 +2,7 @@ FROM node:8
 
 ENV REACTIONDEV_UPDATED=20170831 \
   BUILD_PACKAGES='git wget curl locales sudo vim' \
-  REACTION_BRANCH='v1.4.1' \
+  REACTION_BRANCH='v1.3.0' \
   REACTION_ROOT='/opt/reaction'
 
 RUN DEBIAN_FRONTEND=noninteractive \
