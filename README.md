@@ -30,9 +30,9 @@ docker run --name reactiondev -d \
 and point your browser to
 [http://localhost:3002](http://localhost:3002)
 
-### Tags
+### Demo Tags
 
-There are a few tags available which correspond to being demo's of that
+There are a few demo tags available which correspond to being demo's of that
 particular verison of Reaction Commerce and merely do a
 `reaction init -b TAG` when building
 
@@ -65,9 +65,14 @@ node-stretch
 node-wheezy
 ```
 
-example:
+Of note, these are different than the demo tags section above in that they
+are intended to have a mounted reaction directory, e.g.
+
 ```
-docker run --name reactiondevdemo -d -p 3001:3000 -v $(REACTION_ROOT):/home/node/reaction joshuacox/reactiondev:node-slim
+docker run --name reactiondevdemo -d \
+  -p 3001:3000 \
+  -v $(REACTION_ROOT):/home/node/reaction \
+  joshuacox/reactiondev:node-slim
 ```
 
 ### Environment variables
