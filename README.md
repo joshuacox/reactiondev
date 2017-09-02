@@ -15,6 +15,9 @@
 		joshuacox/reactiondev
 ```
 
+and point your browser to
+[http://localhost:3002](http://localhost:3002)
+
 ### Makefile
 
 A makefile is included in the git repo because I'm a lazy typist
