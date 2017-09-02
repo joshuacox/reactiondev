@@ -2,6 +2,7 @@ FROM node:8
 
 ENV REACTIONDEV_UPDATED=20170831 \
   BUILD_PACKAGES='git wget curl locales sudo vim' \
+  REACTION_BRANCH='master' \
   REACTION_ROOT='/opt/reaction'
 
 RUN DEBIAN_FRONTEND=noninteractive \
@@ -26,7 +27,7 @@ WORKDIR /opt
 RUN curl https://install.meteor.com/ | sh \
   &&  sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.1/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor \
   &&  /bin/bash -c -l "sudo npm i -g reaction-cli" \
-  &&  /bin/bash -c -l "reaction init"
+  &&  /bin/bash -c -l "reaction init -b $REACTION_BRANCH"
 
 #USER root
 #RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo
