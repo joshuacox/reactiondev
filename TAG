@@ -1,1 +1,1 @@
-joshuacox/reactiondev:latest
+joshuacox/reactiondev:node-8.4
