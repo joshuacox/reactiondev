@@ -30,6 +30,28 @@ docker run --name reactiondev -d \
 and point your browser to
 [http://localhost:3002](http://localhost:3002)
 
+### Tags
+
+There are a few tags available which correspond to being demo's of that
+particular verison of Reaction Commerce and merely do a
+`reaction init -b TAG` when building
+
+```
+v1.4.1
+v1.4.0
+v1.3.0
+```
+
+### Branches
+
+Much like the tags I have a few branches that relate to the upcoming
+marketplace, alpine, and experimental builds, notably:
+
+```
+alpine
+marketplace
+```
+
 ### Makefile
 
 A makefile is included in the git repo because I'm a lazy typist
