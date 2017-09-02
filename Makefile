@@ -25,7 +25,7 @@ run: clean .reactiondev.cid
 demo:
 	docker run --name reactiondevdemo \
 		-d \
-		-p 3000:3000 \
+		-p 3001:3000 \
 		--cidfile=.reactiondev.cid \
 		joshuacox/reactiondev:demo
 

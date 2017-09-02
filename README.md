@@ -2,11 +2,6 @@
 
   A simple dockerized [reaction commerce](https://reactioncommerce.com/) dev environment, i use many flavors of linux on the same laptop, this gives me a consistent way of starting node to view my edits across them all.
 
-#### Alternative
-
-You can also use [NVM](https://github.com/creationix/nvm) and many other
-ways of managing node versions, this is just one.
-
 ### Usage
 
 `docker pull joshuacox/reactiondev`  and then run it with something like
@@ -45,3 +40,8 @@ and you will be prompted again, these files are ignored by git
 `make enter` to go into the dev environment
 
 `make clean` will stop and remove the container
+
+#### Alternatives
+
+You can also use [NVM](https://github.com/creationix/nvm) and many other
+ways of managing node versions, this is just one.
