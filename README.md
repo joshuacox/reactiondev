@@ -27,6 +27,16 @@ docker run --name reactiondev -d \
   joshuacox/reactiondev
 ```
 
+or pass in your own reaction command:
+
+```
+docker run --name reactiondev -d \
+  -p 3002:3000 \
+  -v $(REACTION_ROOT):/home/node/reaction \
+  joshuacox/reactiondev
+  reaction test
+```
+
 and point your browser to
 [http://localhost:3002](http://localhost:3002)
 
@@ -108,6 +118,9 @@ the one you chose above when you were prompted
 Note: to reset the answers to those questions just edit them or
 `rm REACTION_ROOT` or `rm PORT`
 and you will be prompted again, these files are ignored by git
+
+`make test` will run the container with `reaction test` as the initial
+command upon startup
 
 `make logs` and follow the logs, ctrl-C to stop watching the logs
 
