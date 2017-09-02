@@ -2,21 +2,63 @@
 
   A simple dockerized [reaction commerce](https://reactioncommerce.com/) dev environment, i use many flavors of linux on the same laptop, this gives me a consistent way of starting node to view my edits across them all.
 
+
+### Demo
+
+For a ephemeral demo instance that will not retain data, and let you
+play around with a default Reaction demo
+
+`docker pull joshuacox/reactiondev:demo`  and then run it with something like
+
+```
+	docker run --name reactiondevdemo -d -p 3001:3000 joshuacox/reactiondev:demo
+```
+
 ### Usage
+
+I'm using it to test out local reaction development directories as such:
 
 `docker pull joshuacox/reactiondev`  and then run it with something like
 
 ```
-	docker run --name reactiondev \
-		-d \
-		-p 3002:3000 \
-		--cidfile=.reactiondev.cid \
-		-v $(REACTION_ROOT):/home/node/reaction \
-		joshuacox/reactiondev
+docker run --name reactiondev -d \
+  -p 3002:3000 \
+  -v $(REACTION_ROOT):/home/node/reaction \
+  joshuacox/reactiondev
 ```
 
 and point your browser to
 [http://localhost:3002](http://localhost:3002)
+
+### Tags
+
+There are a few tags available which correspond to being demo's of that
+particular verison of Reaction Commerce and merely do a
+`reaction init -b TAG` when building
+
+```
+v1.4.1
+v1.4.0
+v1.3.0
+```
+
+### Branches
+
+Also available in dockerhub as tags, I have a few branches that relate to the upcoming
+marketplace, alpine, different node versions, and experimental builds, notably:
+
+```
+alpine
+marketplace
+node-8
+node-8.4
+node-boron
+node-argon
+node-onbuild
+node-slim
+node-stretch
+node-wheezy
+```
 
 ### Makefile
 
