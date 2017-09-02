@@ -2,7 +2,6 @@
 
   A simple dockerized [reaction commerce](https://reactioncommerce.com/) dev environment, i use many flavors of linux on the same laptop, this gives me a consistent way of starting node to view my edits across them all.
 
----
 
 ### Demo
 
@@ -14,8 +13,6 @@ play around with a default Reaction demo
 ```
 docker run --name reactiondevdemo -d -p 3001:3000 joshuacox/reactiondev:demo
 ```
-
----
 
 ### Usage
 
@@ -43,8 +40,6 @@ docker run --name reactiondev -d \
 and point your browser to
 [http://localhost:3002](http://localhost:3002)
 
----
-
 ### Demo Tags
 
 There are a few demo tags available which correspond to being demo's of that
@@ -61,8 +56,6 @@ example:
 ```
 docker run --name reactiondevdemo -d -p 3001:3000 joshuacox/reactiondev:v1.4.0
 ```
-
----
 
 ### Branches
 
@@ -92,8 +85,6 @@ docker run --name reactiondevdemo -d \
   joshuacox/reactiondev:node-slim
 ```
 
----
-
 ### Environment variables
 
 `REACTION_ROOT`  inside the container this by default will point to
@@ -107,8 +98,6 @@ docker run --name reactiondev -d \
   -v $(REACTION_ROOT):/opt/reaction \
   joshuacox/reactiondev
 ```
-
----
 
 ### Makefile
 
@@ -149,8 +138,6 @@ there are also various branches you can test easily with the makefile:
 `make node-stretch`
 `make node-wheezy`
 `make node-onbuild`
-
----
 
 #### Alternatives
 
