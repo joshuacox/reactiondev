@@ -5,13 +5,13 @@
 
 ### Demo
 
-For a ephemeral demo instance that will not retain data, and let you
+For an ephemeral demo instance that will not retain data, and let you
 play around with a default Reaction demo
 
 `docker pull joshuacox/reactiondev:demo`  and then run it with something like
 
 ```
-	docker run --name reactiondevdemo -d -p 3001:3000 joshuacox/reactiondev:demo
+docker run --name reactiondevdemo -d -p 3001:3000 joshuacox/reactiondev:demo
 ```
 
 ### Usage
@@ -42,6 +42,11 @@ v1.4.0
 v1.3.0
 ```
 
+example:
+```
+docker run --name reactiondevdemo -d -p 3001:3000 joshuacox/reactiondev:v1.4.0
+```
+
 ### Branches
 
 Also available in dockerhub as tags, I have a few branches that relate to the upcoming
@@ -58,6 +63,25 @@ node-onbuild
 node-slim
 node-stretch
 node-wheezy
+```
+
+example:
+```
+docker run --name reactiondevdemo -d -p 3001:3000 -v $(REACTION_ROOT):/home/node/reaction joshuacox/reactiondev:node-slim
+```
+
+### Environment variables
+
+`REACTION_ROOT`  inside the container this by default will point to
+`/home/node/reaction` you can point it to whereever you want and change
+your corresponding volume mount e.g. 
+
+```sh
+docker run --name reactiondev -d \
+  -p 3002:3000 \
+  -e REACTION_ROOT=/opt/reaction \
+  -v $(REACTION_ROOT):/opt/reaction \
+  joshuacox/reactiondev
 ```
 
 ### Makefile
