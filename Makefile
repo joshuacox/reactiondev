@@ -1,16 +1,17 @@
-TAG:=$(cat TAG)
-
 all: build clean run ps
 
 build:
+	$(eval TAG := $(shell cat TAG))
 	docker build -t $(TAG) .
 
 pull:
+	$(eval TAG := $(shell cat TAG))
 	docker pull $(TAG)
 
 run: clean .reactiondev.cid
 
 .reactiondev.cid: PORT REACTION_ROOT
+	$(eval TAG := $(shell cat TAG))
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	docker run --name reactiondev \
