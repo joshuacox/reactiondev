@@ -7,12 +7,12 @@
 `docker pull joshuacox/reactiondev`  and then run it with something like
 
 ```
-docker run --name reactiondev \
-	-d \
-	-p 3000:3000 \
-	--cidfile=.reactiondev.cid \
-	-v $(HOME)/.ssh:/home/reaction/.ssh \
-	joshuacox/reactiondev
+	docker run --name reactiondev \
+		-d \
+		-p 3002:3000 \
+		--cidfile=.reactiondev.cid \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		joshuacox/reactiondev
 ```
 
 ### Makefile
