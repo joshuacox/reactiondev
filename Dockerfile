@@ -1,7 +1,7 @@
 FROM node:8
 
 ENV REACTIONDEV_UPDATED=20170831 \
-  BUILD_PACKAGES='git wget curl locales sudo vim' \
+  BUILD_PACKAGES='git wget curl locales sudo' \
   REACTION_ROOT='/home/node/reaction'
 
 RUN DEBIAN_FRONTEND=noninteractive \
