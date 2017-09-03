@@ -40,6 +40,28 @@ docker run --name reactiondev -d \
   reaction test
 ```
 
+or meteor command:
+```
+docker run --name reactiondev -d \
+  -p 3002:3000 \
+  -v $(REACTION_ROOT):/home/node/reaction \
+  joshuacox/reactiondev \
+  meteor npm i
+```
+
+or login and do it yourself:
+```
+docker exec -it \
+  $REACTIODEV_CONTAINER_ID
+  /bin/bash
+```
+
+   Where $REACTIODEV_CONTAINER_ID is the container ID of reactiondev
+`docker ps|grep reactiondev|awk '{print $1}'`
+
+Or use my makefile below with `make enter`, which exploits the
+`--cidfile` option for `docker run`.
+
 and point your browser to
 [http://localhost:3002](http://localhost:3002)
 
