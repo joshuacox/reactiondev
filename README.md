@@ -98,7 +98,6 @@ node-8
 node-8.4
 node-boron
 node-argon
-node-onbuild
 node-slim
 node-stretch
 node-wheezy
@@ -138,6 +137,10 @@ A makefile is included in the git repo because I'm a lazy typist
 
 `make build` to build it
 
+-or-
+
+`make pull` to pull it
+
 `make demo` to run an ephemeral instance for demo purposes (everything
 will be blown away when it is stopped)
 
@@ -173,7 +176,6 @@ there are also various branches you can test easily with the makefile:
 `make node-slim`
 `make node-stretch`
 `make node-wheezy`
-`make node-onbuild`
 
 ---
 
