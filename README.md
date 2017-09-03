@@ -141,10 +141,7 @@ A makefile is included in the git repo because I'm a lazy typist
 
 `make pull` to pull it
 
-`make demo` to run an ephemeral instance for demo purposes (everything
-will be blown away when it is stopped)
-
-`make run` to run it with your local checked out copy of reaction that
+`make` to run it with your local checked out copy of reaction that
 you are modifying live, you will be prompted for the path to this
 reaction directory and the port number you wish to use, after which it will save this location
 
@@ -154,6 +151,9 @@ the one you chose above when you were prompted
 Note: to reset the answers to those questions just edit them or
 `rm REACTION_ROOT` or `rm PORT`
 and you will be prompted again, these files are ignored by git
+
+`make demo` to run an ephemeral instance for demo purposes (everything
+will be blown away when it is stopped)
 
 `make test` will run the container with `reaction test` as the initial
 command upon startup
