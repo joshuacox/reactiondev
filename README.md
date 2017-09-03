@@ -48,13 +48,14 @@ and point your browser to
 ### Demo Tags
 
 There are a few demo tags available which correspond to being demo's of that
-particular verison of Reaction Commerce and merely do a
+particular verison of Reaction Commerce and the marketplace, merely do a
 `reaction init -b TAG` when building
 
 ```
 v1.4.1
 v1.4.0
 v1.3.0
+marketplace
 ```
 
 example:
@@ -66,12 +67,11 @@ docker run --name reactiondevdemo -d -p 3001:3000 joshuacox/reactiondev:v1.4.0
 
 ### Branches
 
-Also available in dockerhub as tags, I have a few branches that relate to the upcoming
-marketplace, alpine, different node versions, and experimental builds, notably:
+Also available in dockerhub as tags, I have a few branches that relate to the
+alpine, different node versions, and experimental builds, notably:
 
 ```
 alpine
-marketplace
 node-8
 node-8.4
 node-boron
