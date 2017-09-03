@@ -14,15 +14,32 @@ run: clean .reactiondev.cid
 	$(eval TAG := $(shell cat TAG))
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
+	$(eval TMP := $(shell mktemp -d --suffix=REACTION_TMP))
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
 		--cidfile=.reactiondev.cid \
 		-e REACTION_ROOT=/home/node/reaction \
 		-v $(REACTION_ROOT):/home/node/reaction \
+		-v $(TMP):/tmp \
 		$(TAG)
 
-test: PORT REACTION_ROOT clean
+i: PORT REACTION_ROOT clean
+	$(eval TAG := $(shell cat TAG))
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
+	$(eval TMP := $(shell mktemp -d --suffix=REACTION_TMP))
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		-v $(TMP):/tmp \
+		$(TAG) \
+		meteor npm i
+
+test: PORT REACTION_ROOT i clean
 	$(eval TAG := $(shell cat TAG))
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
@@ -53,9 +70,14 @@ logs:
 	docker logs -f `cat .reactiondev.cid`
 
 clean:
-	-docker stop `cat .reactiondev.cid`
-	-docker rm `cat .reactiondev.cid`
-	-rm -f .reactiondev.cid
+	-@echo -n 'Cleaning up..'
+	-@touch .reactiondev.cid
+	-@docker stop `cat .reactiondev.cid` 2>/dev/null || true
+	-@echo -n '..'
+	-@docker rm `cat .reactiondev.cid` 2>/dev/null || true
+	-@echo -n '..'
+	-@rm -f .reactiondev.cid
+	-@echo  '...'
 
 ps:
 	-@sleep 2

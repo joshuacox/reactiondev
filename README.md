@@ -133,6 +133,9 @@ and you will be prompted again, these files are ignored by git
 `make test` will run the container with `reaction test` as the initial
 command upon startup
 
+`make i` will run the container with `meteor npm i` as the initial
+command upon startup
+
 `make logs` and follow the logs, ctrl-C to stop watching the logs
 
 `make enter` to go into the dev environment
@@ -158,4 +161,3 @@ You can also use [NVM](https://github.com/creationix/nvm) and many other
 ways of managing node versions, this is just one.
 
 ---
-
