@@ -1,8 +1,7 @@
-FROM node:8
+FROM node:latest
 
 ENV REACTIONDEV_UPDATED=20170831 \
   BUILD_PACKAGES='git wget curl locales sudo vim' \
-  REACTION_BRANCH='v1.3.0' \
   REACTION_ROOT='/opt/reaction'
 
 RUN DEBIAN_FRONTEND=noninteractive \
@@ -24,6 +23,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 USER node
 WORKDIR /opt
 
+ENV REACTION_BRANCH='latest'
 RUN curl https://install.meteor.com/ | sh \
   &&  sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.1/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor \
   &&  /bin/bash -c -l "sudo npm i -g reaction-cli" \
