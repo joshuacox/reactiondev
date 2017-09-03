@@ -72,9 +72,9 @@ logs:
 clean:
 	-@echo -n 'Cleaning up..'
 	-@touch .reactiondev.cid
-	-@docker stop `cat .reactiondev.cid` 2>/dev/null || true
+	-@docker stop `cat .reactiondev.cid` &>/dev/null || true
 	-@echo -n '..'
-	-@docker rm `cat .reactiondev.cid` 2>/dev/null || true
+	-@docker rm `cat .reactiondev.cid` &>/dev/null || true
 	-@echo -n '..'
 	-@rm -f .reactiondev.cid
 	-@echo  '...'
