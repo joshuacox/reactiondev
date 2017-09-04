@@ -138,15 +138,22 @@ docker run --name reactiondev -d \
 
 ##### cmd
 
-`./cmd echo hello world` Using `./cmd` you can run anything you like
-inside the container.
+Using `./cmd` you can run anything you like
+inside the container. e.g.
+
+`./cmd echo hello world`
 
 ##### build
 
-`./build mycustom` will run `sudo reaction build mycustom` inside the
+`./build IMAGE_NAME` will run `sudo reaction build IMAGE_NAME` inside the
 container, but use your local docker to build the custom reaction build.
+e.g.
 
-There are other scripts in the `scripts` directory which contains it's
+`./build mycustom`
+
+`docker images mycustom` afterwards to see your image
+
+There are other scripts in the `scripts` directory, which contains it's
 own readme.
 
 
@@ -185,6 +192,7 @@ command upon startup
 `make demos` to run many ephemeral instances for demo purposes (everything
 will be blown away when they are stopped) caution this will download
 many demos at once and run them all on ports above 3100!
+
 `make localbuild` to build the reactiondev image locally it
 
 there are also various branches you can test easily with the makefile:
