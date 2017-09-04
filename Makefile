@@ -68,11 +68,12 @@ tagged: PORT REACTION_ROOT clean
 		$(TAG)
 
 demo:
-	docker run --name reactiondevdemo \
-		-d \
-		-p 3001:3000 \
-		--cidfile=.reactiondev.cid \
-		joshuacox/reactiondev:demo
+	PORT=3100 TAG="joshuacox/reactiondev:demo" make demod
+
+demod:
+	docker run -d \
+		-p $(PORT):3000 \
+		$(TAG)
 
 enter:
 	docker exec -it \
@@ -137,3 +138,19 @@ node-stretch: clean
 
 node-wheezy: clean
 	./scripts/tagged joshuacox/reactiondev:node-wheezy
+
+demos: v141 v140 v130 marketplace
+
+v141:
+	./scripts/demo joshuacox/reactiondev:v1.4.1 3141
+
+v140:
+	./scripts/demo joshuacox/reactiondev:v1.4.0 3140
+
+v130:
+	./scripts/demo joshuacox/reactiondev:v1.3.0 3130
+
+marketplace:
+	./scripts/demo joshuacox/reactiondev:marketplace 3101
+
+

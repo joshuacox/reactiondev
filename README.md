@@ -167,15 +167,30 @@ command upon startup
 
 `make clean` will stop and remove the container
 
+`make demos` to run many ephemeral instances for demo purposes (everything
+will be blown away when they are stopped) caution this will download
+many demos at once and run them all on ports above 3100!
+
 there are also various branches you can test easily with the makefile:
 
-`make node-8`
-`make node-8.4`
-`make node-argon`
-`make node-boron`
-`make node-slim`
-`make node-stretch`
-`make node-wheezy`
+```
+make node-8
+make node-8.4
+make node-argon
+make node-boron
+make node-slim
+make node-stretch
+make node-wheezy
+```
+
+and the demos
+
+```
+make v141
+make v140
+make v130
+make marketplace
+```
 
 ---
 
