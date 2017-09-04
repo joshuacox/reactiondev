@@ -15,6 +15,8 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && echo '%sudo ALL=(ALL) NOPASSWD:ALL'>> /etc/sudoers \
   && chown -R node:node /opt \
   && gpasswd -a node sudo \
+  && groupadd -g 991 docker \
+  && gpasswd -a node docker \
   && apt-get -y autoremove \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*

@@ -1,6 +1,6 @@
 all: run ps
 
-build:
+localbuild:
 	$(eval TAG := $(shell cat TAG))
 	docker build -t $(TAG) .
 
@@ -50,6 +50,32 @@ command: PORT REACTION_ROOT clean
 		-v $(TMP):/tmp \
 		$(TAG) \
 		$(REACTION_CMD)
+
+build: rcbuild logs
+
+rcbuild: PORT REACTION_ROOT clean
+	$(eval TAG := $(shell cat TAG))
+	$(eval PORT := $(shell cat PORT))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
+	$(eval TMP := $(shell mktemp -d --suffix=REACTION_TMP))
+	@echo $(TMP) >> .tmplist
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		-v $(TMP):/tmp \
+		--privileged \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v $(shell which docker):/bin/docker \
+		$(TAG) \
+		reaction build $(REACTION_BUILD_NAME)
+
+ls:
+	  ls -lh /var/run/docker.sock
+		sudo reaction build $(REACTION_BUILD_NAME)
+		docker ps
 
 tag: tagged logs
 
@@ -107,6 +133,11 @@ PORT:
 REACTION_ROOT:
 	@while [ -z "$$REACTION_ROOT" ]; do \
 		read -r -p "Enter the reaction root you wish to associate with this container [REACTION_ROOT]: " REACTION_ROOT; echo "$$REACTION_ROOT">>REACTION_ROOT; cat REACTION_ROOT; \
+	done ;
+
+REACTION_BUILD_NAME:
+	@while [ -z "$$REACTION_BUILD_NAME" ]; do \
+		read -r -p "Enter the reaction build name [REACTION_BUILD_NAME]: " REACTION_BUILD_NAME; echo "$$REACTION_BUILD_NAME">>REACTION_BUILD_NAME; cat REACTION_BUILD_NAME; \
 	done ;
 
 alpine: clean

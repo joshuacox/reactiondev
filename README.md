@@ -9,11 +9,13 @@
 For an ephemeral demo instance that will not retain data, and let you
 play around with a default Reaction demo
 
-`docker pull joshuacox/reactiondev:demo`  and then run it with something like
+run it with:
 
 ```
-docker run --name reactiondevdemo -d -p 3001:3000 joshuacox/reactiondev:demo
+docker run -P 3001:3000 joshuacox/reactiondev:demo
 ```
+
+and you'll find it on [localhost:3001](http://localhost:3001/)
 
 ---
 
@@ -131,13 +133,26 @@ docker run --name reactiondev -d \
 
 ---
 
+### Scripts
+---
+
+##### cmd
+
+`./cmd echo hello world` Using `./cmd` you can run anything you like
+inside the container.
+
+##### build
+
+`./build mycustom` will run `sudo reaction build mycustom` inside the
+container, but use your local docker to build the custom reaction build.
+
+There are other scripts in the `scripts` directory which contains it's
+own readme.
+
+
 ### Makefile
 
-A makefile is included in the git repo because I'm a lazy typist
-
-`make build` to build it
-
--or-
+A makefile is included in the git repo because I'm a lazy typist.
 
 `make pull` to pull it
 
@@ -170,6 +185,7 @@ command upon startup
 `make demos` to run many ephemeral instances for demo purposes (everything
 will be blown away when they are stopped) caution this will download
 many demos at once and run them all on ports above 3100!
+`make localbuild` to build the reactiondev image locally it
 
 there are also various branches you can test easily with the makefile:
 
