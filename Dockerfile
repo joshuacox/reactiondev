@@ -1,17 +1,13 @@
 FROM node:latest
 
 ENV REACTIONDEV_UPDATED=20170831 \
-  BUILD_PACKAGES='git wget curl locales sudo' \
+  BUILD_PACKAGES='git curl sudo' \
   REACTION_ROOT='/home/node/reaction'
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
   && apt-get -qqy --no-install-recommends install \
      $BUILD_PACKAGES \
-  && echo 'en_US.ISO-8859-15 ISO-8859-15'>>/etc/locale.gen \
-  && echo 'en_US ISO-8859-1'>>/etc/locale.gen \
-  && echo 'en_US.UTF-8 UTF-8'>>/etc/locale.gen \
-  && locale-gen \
   && echo '%sudo ALL=(ALL) NOPASSWD:ALL'>> /etc/sudoers \
   && chown -R node:node /opt \
   && gpasswd -a node sudo \
