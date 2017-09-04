@@ -143,9 +143,6 @@ REACTION_BUILD_NAME:
 alpine: clean
 	./scripts/tagged joshuacox/reactiondev:alpine
 
-marketplace: clean
-	./scripts/tagged joshuacox/reactiondev:marketplace
-
 node-8: clean
 	./scripts/tagged joshuacox/reactiondev:node-8
 
@@ -183,5 +180,3 @@ v130:
 
 marketplace:
 	./scripts/demo joshuacox/reactiondev:marketplace 3101
-
-
