@@ -31,7 +31,7 @@ RUN curl https://install.meteor.com/ | sh \
 
 USER root
 RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo
-RUN chown -R node:node /home/reaction
+RUN chown -R node:node /home/node
 USER node
 
 RUN mkdir -p /home/node/reaction \
