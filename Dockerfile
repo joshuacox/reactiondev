@@ -11,17 +11,21 @@ RUN apk update && apk upgrade \
   && addgroup sudo \
   && echo '%sudo ALL=(ALL) NOPASSWD:ALL'>> /etc/sudoers \
   && gpasswd -a node sudo \
-  && chown -R node:node /home/node
+  && chown -R node:node /home/node \
+  && groupadd -g 991 docker \
+  && gpasswd -a node docker
+
 
 USER node
-RUN curl https://install.meteor.com/ | sh
-RUN sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.1/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor
-RUN sudo npm i -g reaction-cli
-
 WORKDIR /home/node
-
-#RUN /bin/bash -c "reaction init"
+RUN sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.1/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor \
+  && sudo npm i -g reaction-cli
 
 WORKDIR /home/node/reaction
+RUN mkdir -p /home/node/reaction \
+  && chown node:node /home/node/reaction
+WORKDIR /home/node/reaction
 
+COPY assets /assets
+ENTRYPOINT [ "/assets/start" ]
 CMD [ "reaction" ]

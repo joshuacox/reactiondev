@@ -1,1 +1,1 @@
-joshuacox/reactiondev:aptremove
+joshuacox/reactiondev:alpine
