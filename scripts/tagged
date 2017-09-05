@@ -1,0 +1,4 @@
+#!/bin/bash
+# Runs a command in the reactiondev env and shows you the output
+export TAG=$1
+make tag
