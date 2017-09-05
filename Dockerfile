@@ -1,9 +1,8 @@
 FROM node:stretch
 
-ENV REACTIONDEV_UPDATED=20170831 \
-  BUILD_PACKAGES='git wget curl locales sudo vim' \
-  REACTION_BRANCH='v1.4.1' \
-  REACTION_ROOT='/opt/reaction'
+ENV REACTIONDEV_UPDATED=20170905 \
+  BUILD_PACKAGES='git wget curl locales sudo' \
+  REACTION_ROOT='/home/node/reaction'
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
@@ -16,6 +15,8 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && echo '%sudo ALL=(ALL) NOPASSWD:ALL'>> /etc/sudoers \
   && chown -R node:node /opt \
   && gpasswd -a node sudo \
+  && groupadd -g 991 docker \
+  && gpasswd -a node docker \
   && apt-get -y autoremove \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
@@ -28,13 +29,17 @@ RUN curl https://install.meteor.com/ | sh \
   &&  sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.1/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor \
   &&  /bin/bash -c -l "sudo npm i -g reaction-cli" \
   &&  /bin/bash -c -l "reaction init -b $REACTION_BRANCH"
+#  &&  /bin/bash -c -l "reaction init"
 
 #USER root
 #RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo
 #RUN chown -R node:node /home/reaction
 #USER node
 
-WORKDIR /opt/reaction
+#WORKDIR /opt/reaction
+RUN mkdir -p /home/node/reaction \
+  && chown node:node /home/node/reaction
+WORKDIR /home/node/reaction
 
 COPY assets /assets
 ENTRYPOINT [ "/assets/start" ]
