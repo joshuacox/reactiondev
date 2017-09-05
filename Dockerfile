@@ -23,7 +23,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 
 
 USER node
-WORKDIR /opt
+WORKDIR /home/node
 
 RUN curl https://install.meteor.com/ | sh \
   &&  sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.1/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor \
@@ -31,7 +31,7 @@ RUN curl https://install.meteor.com/ | sh \
 
 USER root
 RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo
-#RUN chown -R node:node /home/node
+RUN chown -R node:node /home/node
 USER node
 
 RUN mkdir -p /home/node/reaction \
