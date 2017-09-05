@@ -1,8 +1,8 @@
 FROM node:latest
 
-ENV REACTIONDEV_UPDATED=20170831 \
-  BUILD_PACKAGES='git wget curl locales sudo' \
-  REACTION_ROOT='/home/node/reaction'
+ENV BUILD_PACKAGES='git wget curl locales sudo' \
+  REACTION_ROOT='/home/node/reaction' \
+  REACTIONDEV_UPDATED=20170905
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
@@ -31,7 +31,7 @@ RUN curl https://install.meteor.com/ | sh \
 
 USER root
 RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo
-RUN chown -R node:node /home/node
+#RUN chown -R node:node /home/node
 USER node
 
 RUN mkdir -p /home/node/reaction \
