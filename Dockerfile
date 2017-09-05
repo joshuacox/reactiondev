@@ -1,6 +1,6 @@
 FROM node:latest
 
-ENV REACTIONDEV_UPDATED=20170831 \
+ENV REACTIONDEV_UPDATED=20170905 \
   BUILD_PACKAGES='git wget curl locales sudo' \
   REACTION_ROOT='/home/node/reaction'
 
@@ -28,14 +28,12 @@ WORKDIR /opt
 RUN curl https://install.meteor.com/ | sh \
   &&  sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.1/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor \
   &&  /bin/bash -c -l "sudo npm i -g reaction-cli"
-#  &&  /bin/bash -c -l "reaction init"
 
 #USER root
 #RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo
-#RUN chown -R node:node /home/reaction
+#RUN chown -R node:node /home/node
 #USER node
 
-#WORKDIR /opt/reaction
 RUN mkdir -p /home/node/reaction \
   && chown node:node /home/node/reaction
 WORKDIR /home/node/reaction
