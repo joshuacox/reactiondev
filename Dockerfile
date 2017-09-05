@@ -1,7 +1,8 @@
 FROM node:8-alpine
 
-ENV OCTOSSH_UPDATED=20170828 \
-BUILD_PACKAGES='sudo git wget openssh-client curl ca-certificates shadow bash'
+ENV BUILD_PACKAGES='sudo git wget openssh-client curl ca-certificates shadow bash' \
+  REACTION_ROOT='/home/node/reaction' \
+  REACTIONDEV_UPDATED=20170905
 
 
 RUN apk update && apk upgrade \
