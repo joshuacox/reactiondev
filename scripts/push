@@ -1,0 +1,17 @@
+#!/bin/bash
+export REACTION_BUILD_NAME=$1
+
+if [ -f "$HOME/.dockerhub_user" ]; then
+  DOCKERHUB_USER=$(cat $HOME/.dockerhub_user)
+else
+  echo 'you can put your docker hub user name in $HOME/.dockerhub_user'
+  exit 1
+fi
+if [ -f "$HOME/.dockerhub_reactiondev" ]; then
+  DOCKERHUB_REPO=$(cat $HOME/.dockerhub_reactiondev)
+else
+  echo 'put the repo name in  $HOME/.dockerhub_reactiondev and this script will push the image up to your dockerhub account'
+  exit 2
+fi
+  docker tag $REACTION_BUILD_NAME $DOCKERHUB_USER/$DOCKERHUB_REPO:$REACTION_BUILD_NAME
+  docker push   $DOCKERHUB_USER/$DOCKERHUB_REPO:$REACTION_BUILD_NAME
