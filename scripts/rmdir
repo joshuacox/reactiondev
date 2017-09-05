@@ -1,0 +1,8 @@
+#!/bin/bash
+# remove temp dir
+
+if [ -d "$1" ]; then
+  # Control will enter here if $DIRECTORY exists.
+  echo removing temp directory $1
+  rm -Rf $1
+fi
