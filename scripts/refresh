@@ -1,0 +1,6 @@
+#!/bin/bash
+DATE=$(date +%Y%m%d)
+FORTUNE=$(fortune -s)
+
+sed -i "s/^\ \ REACTIONDEV_UPDATED=.*$/  REACTIONDEV_UPDATED=$DATE/" Dockerfile
+git commit -am "$FORTUNE -- $DATE"
