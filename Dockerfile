@@ -1,6 +1,6 @@
 FROM node:latest
 
-ENV REACTIONDEV_UPDATED=20170831 \
+ENV REACTIONDEV_UPDATED=20170905 \
   BUILD_PACKAGES='git curl sudo' \
   REACTION_ROOT='/home/node/reaction'
 
