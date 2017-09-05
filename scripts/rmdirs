@@ -1,0 +1,8 @@
+#!/bin/sh
+echo 'Removing all temp dirs'
+if [ -f ".tmplist" ]; then
+  cat .tmplist|xargs -n1 -I{} ./scripts/rmdir {}
+  rm .tmplist
+else
+  echo 'Nothing to do'
+fi
