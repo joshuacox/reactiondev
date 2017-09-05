@@ -1,0 +1,22 @@
+#!/bin/bash
+# Runs a command in the reactiondev env and shows you the output
+export REACTION_BUILD_NAME=$1
+make clean
+
+TAG=$(cat TAG)
+PORT=$(cat PORT)
+REACTION_ROOT=$(cat REACTION_ROOT)
+TMP=$(mktemp -d --suffix=REACTION_TMP)
+echo $TMP >> .tmplist
+
+docker run --name reactiondev \
+  --cidfile=.reactiondev.cid \
+  -e REACTION_ROOT=/home/node/reaction \
+  -v $REACTION_ROOT:/home/node/reaction \
+  -v $TMP:/tmp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v $(which docker):/bin/docker \
+  $TAG \
+  reaction build $REACTION_BUILD_NAME
+
+./scripts/push $REACTION_BUILD_NAME
