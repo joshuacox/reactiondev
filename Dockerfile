@@ -24,7 +24,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 USER node
 WORKDIR /home/node
 
-ENV REACTION_BRANCH='marketplace'
+ENV REACTION_BRANCH='marketplace' \
   REACTION_EMAIL="admin@example.com" \
   REACTION_USER="admin" \
   REACTION_AUTH="p@ssw0rd"
