@@ -1,4 +1,4 @@
-all: run ps
+all: run ps logs
 
 localbuild:
 	$(eval TAG := $(shell cat TAG))
