@@ -1,4 +1,4 @@
-all: run ps
+all: run ps logs
 
 localbuild:
 	$(eval TAG := $(shell cat TAG))
@@ -53,24 +53,9 @@ command: PORT REACTION_ROOT clean
 
 build: rcbuild logs
 
-rcbuild: PORT REACTION_ROOT clean
-	$(eval TAG := $(shell cat TAG))
-	$(eval PORT := $(shell cat PORT))
-	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
-	$(eval TMP := $(shell mktemp -d --suffix=REACTION_TMP))
-	@echo $(TMP) >> .tmplist
-	docker run --name reactiondev \
-		-d \
-		-p $(PORT):3000 \
-		--cidfile=.reactiondev.cid \
-		-e REACTION_ROOT=/home/node/reaction \
-		-v $(REACTION_ROOT):/home/node/reaction \
-		-v $(TMP):/tmp \
-		--privileged \
-		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $(shell which docker):/bin/docker \
-		$(TAG) \
-		reaction build $(REACTION_BUILD_NAME)
+rcbuild: REACTION_BUILD_NAME clean
+	$(eval REACTION_BUILD_NAME := $(shell cat REACTION_BUILD_NAME))
+	./build $(REACTION_BUILD_NAME)
 
 ls:
 	  ls -lh /var/run/docker.sock
@@ -143,9 +128,6 @@ REACTION_BUILD_NAME:
 alpine: clean
 	./scripts/tagged joshuacox/reactiondev:alpine
 
-marketplace: clean
-	./scripts/tagged joshuacox/reactiondev:marketplace
-
 node-8: clean
 	./scripts/tagged joshuacox/reactiondev:node-8
 
@@ -183,5 +165,3 @@ v130:
 
 marketplace:
 	./scripts/demo joshuacox/reactiondev:marketplace 3101
-
-
