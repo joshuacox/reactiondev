@@ -1,0 +1,17 @@
+#!/bin/bash
+# Runs a command in the reactiondev env and shows you the output
+TAG=$(cat TAG)
+PORT=$(cat PORT)
+REACTION_ROOT=$1
+TMP=$(mktemp -d --suffix=REACTION_TMP)
+echo $TMP >> .tmplist
+make clean
+docker run \
+		-d \
+		-p $PORT:3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-v $REACTION_ROOT:/home/node/reaction \
+		-v $TMP:/tmp \
+		$TAG
+make logs
