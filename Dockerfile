@@ -2,7 +2,7 @@ FROM node:latest
 
 ENV BUILD_PACKAGES='git wget curl locales sudo' \
   REACTION_ROOT='/home/node/reaction' \
-  REACTIONDEV_UPDATED=20170905
+  REACTIONDEV_UPDATED=20170910
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
@@ -26,7 +26,7 @@ USER node
 WORKDIR /opt
 
 RUN curl https://install.meteor.com/ | sh \
-  &&  sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.1/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor \
+  &&  sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.2/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor \
   &&  /bin/bash -c -l "sudo npm i -g reaction-cli"
 
 #USER root
