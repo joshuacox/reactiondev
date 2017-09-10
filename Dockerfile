@@ -29,7 +29,6 @@ ENV REACTION_BRANCH='v1.4.1' \
   REACTION_USER="admin" \
   REACTION_AUTH="p@ssw0rd"
 RUN curl https://install.meteor.com/ | sh \
-  &&  sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.1/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor \
   &&  /bin/bash -c -l "sudo npm i -g reaction-cli" \
   &&  /bin/bash -c -l "reaction init -b $REACTION_BRANCH"
 
