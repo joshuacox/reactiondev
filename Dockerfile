@@ -26,7 +26,6 @@ USER node
 WORKDIR /opt
 
 RUN curl https://install.meteor.com/ | sh \
-  &&  sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.2/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor \
   &&  /bin/bash -c -l "sudo npm i -g reaction-cli"
 
 #USER root
