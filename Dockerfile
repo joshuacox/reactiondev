@@ -1,6 +1,6 @@
 FROM node:latest
 
-ENV BUILD_PACKAGES='git wget curl locales sudo' \
+ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar' \
   REACTION_ROOT='/home/node/reaction' \
   REACTIONDEV_UPDATED=20170910
 
@@ -25,8 +25,14 @@ RUN DEBIAN_FRONTEND=noninteractive \
 USER node
 WORKDIR /opt
 
-RUN curl https://install.meteor.com/ | sh \
-  &&  /bin/bash -c -l "sudo npm i -g reaction-cli"
+RUN  /bin/bash -c -l "sudo npm i -g reaction-cli"
+ENV METEOR_VERSION 1.5.1
+COPY install-meteor.sh /opt/install-meteor.sh
+RUN  /bin/bash -l /opt/install-meteor.sh
+#RUN  /bin/bash -c -l "reaction init"
+#RUN rm -Rf /opt/reaction
+#WORKDIR /opt/reaction
+#RUN  /bin/bash -c -l "reaction test"
 
 #USER root
 #RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo
