@@ -4,7 +4,6 @@ ENV BUILD_PACKAGES='sudo git wget openssh-client curl ca-certificates shadow bas
   REACTION_ROOT='/home/node/reaction' \
   REACTIONDEV_UPDATED=20170910
 
-
 RUN apk update && apk upgrade \
   && apk add --no-cache $BUILD_PACKAGES \
   && rm -rf /var/cache/apk/* \
@@ -15,15 +14,23 @@ RUN apk update && apk upgrade \
   && groupadd -g 991 docker \
   && gpasswd -a node docker
 
-
 USER node
-WORKDIR /home/node
-RUN sudo cp "/home/node/.meteor/packages/meteor-tool/1.5.1/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor \
-  && sudo npm i -g reaction-cli
+WORKDIR /opt
 
-WORKDIR /home/node/reaction
-RUN mkdir -p /home/node/reaction \
-  && chown node:node /home/node/reaction
+ENV METEOR_VERSION 1.5.1
+COPY install-meteor.sh /opt/install-meteor.sh
+RUN  /bin/bash -l /opt/install-meteor.sh \
+  && /bin/bash -c -l "sudo npm i -g reaction-cli"
+#RUN  /bin/bash -c -l "reaction init"
+#RUN rm -Rf /opt/reaction
+#WORKDIR /opt/reaction
+#RUN  /bin/bash -c -l "reaction test"
+
+USER root
+RUN apk del sudo
+USER node
+
+RUN mkdir -p /home/node/reaction
 WORKDIR /home/node/reaction
 
 COPY assets /assets
