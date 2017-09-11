@@ -1,6 +1,6 @@
 FROM node:latest
 
-ENV BUILD_PACKAGES='git wget curl locales sudo' \
+ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar' \
   REACTION_ROOT='/home/node/reaction' \
   REACTIONDEV_UPDATED=20170910
 
@@ -24,21 +24,25 @@ RUN DEBIAN_FRONTEND=noninteractive \
 USER node
 WORKDIR /home/node
 
-ENV REACTION_BRANCH='marketplace' \
+ENV METEOR_VERSION 1.5.1 \
+  REACTION_BRANCH='marketplace' \
   REACTION_EMAIL="admin@example.com" \
   REACTION_USER="admin" \
   REACTION_AUTH="p@ssw0rd"
-RUN curl https://install.meteor.com/ | sh \
-  &&  /bin/bash -c -l "sudo npm i -g reaction-cli" \
-  &&  /bin/bash -c -l "reaction init -b $REACTION_BRANCH"
+COPY install-meteor.sh /opt/install-meteor.sh
+RUN  /bin/bash -l /opt/install-meteor.sh \
+  && /bin/bash -c -l "sudo npm i -g reaction-cli"
+RUN  /bin/bash -c -l "reaction init"
+#RUN rm -Rf /opt/reaction
+#WORKDIR /opt/reaction
+#RUN  /bin/bash -c -l "reaction test"
 
 USER root
-RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo \
-&& chown -R node:node /home/node
+RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo
+# RUN chown -R node:node /home/node
 USER node
 
-RUN mkdir -p /home/node/reaction \
-  && chown node:node /home/node/reaction
+RUN mkdir -p /home/node/reaction
 WORKDIR /home/node/reaction
 
 COPY assets /assets
