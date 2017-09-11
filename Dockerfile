@@ -36,11 +36,10 @@ RUN  /bin/bash -l /opt/install-meteor.sh \
 
 USER root
 RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo
-RUN chown -R node:node /home/node
+# RUN chown -R node:node /home/node
 USER node
 
-RUN mkdir -p /home/node/reaction \
-  && chown node:node /home/node/reaction
+RUN mkdir -p /home/node/reaction
 WORKDIR /home/node/reaction
 
 COPY assets /assets
