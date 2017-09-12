@@ -12,7 +12,7 @@ play around with a default Reaction demo
 run it with:
 
 ```
-docker run -P 3001:3000 joshuacox/reactiondev:demo
+docker run -p 3001:3000 joshuacox/reactiondev:demo
 ```
 
 and you'll find it on [localhost:3001](http://localhost:3001/)
