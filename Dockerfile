@@ -26,7 +26,7 @@ USER node
 WORKDIR /opt
 
 ENV METEOR_VERSION 1.5.1
-qCOPY install-meteor.sh /opt/install-meteor.sh
+COPY install-meteor.sh /opt/install-meteor.sh
 RUN  /bin/bash -l /opt/install-meteor.sh \
   && /bin/bash -c -l "sudo npm i -g reaction-cli"
 #RUN  /bin/bash -c -l "reaction init"
