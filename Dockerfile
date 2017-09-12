@@ -1,6 +1,6 @@
 FROM node:8-alpine
 
-ENV BUILD_PACKAGES='sudo git wget openssh-client curl ca-certificates shadow bash' \
+ENV BUILD_PACKAGES='sudo git wget openssh-client curl ca-certificates shadow bash bsdtar debootstrap' \
   REACTION_ROOT='/home/node/reaction' \
   REACTIONDEV_UPDATED=20170910
 
@@ -12,7 +12,13 @@ RUN apk update && apk upgrade \
   && gpasswd -a node sudo \
   && chown -R node:node /home/node \
   && groupadd -g 991 docker \
-  && gpasswd -a node docker
+  && gpasswd -a node docker \
+  && for i in /proc/sys/kernel/grsecurity/chroot_*; do echo 0 | sudo tee $i; done \
+  && mkdir /opt/chroot \
+  && sudo debootstrap --arch=i386 wheezy ~/chroot http://http.debian.net/debian/ \
+  && for i in /proc/sys/kernel/grsecurity/chroot_*; do echo 1 | sudo tee $i; done \
+  && sudo chroot /opt/chroot /bin/bash -c "apt-get install -y bsdtar"
+
 
 USER node
 WORKDIR /opt
