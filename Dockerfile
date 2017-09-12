@@ -35,7 +35,7 @@ RUN  /bin/bash -l /opt/install-meteor.sh \
 #RUN  /bin/bash -c -l "reaction test"
 
 USER root
-RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo
+RUN SUDO_FORCE_REMOVE=yes apt-get remove -yqq sudo
 # RUN chown -R node:node /home/node
 USER node
 
