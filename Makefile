@@ -165,3 +165,6 @@ v130:
 
 marketplace:
 	./scripts/demo joshuacox/reactiondev:marketplace 3101
+
+install-meteor.sh:
+	wget -c https://raw.githubusercontent.com/reactioncommerce/base/master/scripts/install-meteor.sh
