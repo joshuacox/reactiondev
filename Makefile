@@ -33,7 +33,7 @@ t: test
 test:
 	./scripts/cmd reaction test
 
-cmd: command logs
+cmd: command logs clean
 
 command: PORT REACTION_ROOT clean
 	$(eval TAG := $(shell cat TAG))
@@ -95,16 +95,7 @@ logs:
 	docker logs -f `cat .reactiondev.cid`
 
 clean:
-	-@echo -n 'Stopping and Removing any running reactiondev containers..'
-	-@touch .reactiondev.cid
-	-@docker stop `cat .reactiondev.cid` &>/dev/null || true
-	-@echo -n '..'
-	-@docker rm `cat .reactiondev.cid` &>/dev/null || true
-	-@echo '..'
-	-@rm -f .reactiondev.cid
-	-@./scripts/rmdirs
-	-@echo  'clean....'
-	-@echo  'Ready to run reactiondev'
+	-@./scripts/clean
 
 ps:
 	-@sleep 2
@@ -168,3 +159,11 @@ marketplace:
 
 install-meteor.sh:
 	wget -c https://raw.githubusercontent.com/reactioncommerce/base/master/scripts/install-meteor.sh
+
+latest: PORT clean /tmp/reaction
+	echo '/tmp/reaction' > REACTION_ROOT
+	make
+
+/tmp/reaction:
+	cd /tmp; git clone https://github.com/reactioncommerce/reaction.git
+
