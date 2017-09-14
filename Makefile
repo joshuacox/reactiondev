@@ -166,4 +166,5 @@ latest: PORT clean /tmp/reaction
 
 /tmp/reaction:
 	cd /tmp; git clone https://github.com/reactioncommerce/reaction.git
+	cd /tmp/reaction; meteor npm i
 
