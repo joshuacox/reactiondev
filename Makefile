@@ -160,7 +160,7 @@ marketplace:
 install-meteor.sh:
 	wget -c https://raw.githubusercontent.com/reactioncommerce/base/master/scripts/install-meteor.sh
 
-latest: PORT clean /tmp/reaction
+fresh: PORT clean /tmp/reaction
 	echo '/tmp/reaction' > REACTION_ROOT
 	make
 

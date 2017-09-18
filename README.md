@@ -195,6 +195,9 @@ many demos at once and run them all on ports above 3100!
 
 `make localbuild` to build the reactiondev image locally it
 
+`make fresh` will clone a fresh copy of reaction into tmp and build from
+there
+
 there are also various branches you can test easily with the makefile:
 
 ```
