@@ -2,7 +2,7 @@ FROM node:latest
 
 ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar' \
   REACTION_ROOT='/home/node/reaction' \
-  REACTIONDEV_UPDATED=20170914
+  REACTIONDEV_UPDATED=20170918
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
