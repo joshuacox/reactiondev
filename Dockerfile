@@ -2,7 +2,7 @@ FROM node:8-alpine
 
 ENV BUILD_PACKAGES='sudo git wget openssh-client curl ca-certificates shadow bash debootstrap perl' \
   REACTION_ROOT='/home/node/reaction' \
-  REACTIONDEV_UPDATED=20170910
+  REACTIONDEV_UPDATED=20170918
 
 RUN apk update && apk upgrade \
   && apk add --no-cache $BUILD_PACKAGES \
