@@ -2,7 +2,7 @@ FROM node:latest
 
 ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar' \
   REACTION_ROOT='/home/node/reaction' \
-  REACTIONDEV_UPDATED=20170925
+  REACTIONDEV_UPDATED=20170929
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
@@ -20,7 +20,6 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
 
-
 USER node
 WORKDIR /home/node
 
@@ -29,7 +28,7 @@ COPY install-meteor.sh /opt/install-meteor.sh
 RUN  /bin/bash -l /opt/install-meteor.sh \
   && /bin/bash -c -l "sudo npm i -g reaction-cli"
 
-ENV REACTION_BRANCH='v1.4.1' \
+ENV REACTION_BRANCH='master' \
   REACTION_EMAIL="admin@example.com" \
   REACTION_USER="admin" \
   REACTION_AUTH="p@ssw0rd"
