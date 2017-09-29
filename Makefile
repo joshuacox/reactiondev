@@ -162,9 +162,9 @@ install-meteor.sh:
 
 fresh: PORT clean /tmp/reaction
 	echo '/tmp/reaction' > REACTION_ROOT
+	make i
 	make
 
 /tmp/reaction:
 	cd /tmp; git clone https://github.com/reactioncommerce/reaction.git
-	cd /tmp/reaction; meteor npm i
 
