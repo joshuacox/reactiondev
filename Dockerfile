@@ -21,6 +21,13 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
 
+RUN DEBIAN_FRONTEND=noninteractive \
+  && apt-get -qq update \
+  && apt-get -qqy --no-install-recommends install \
+     strace \
+  && apt-get -y autoremove \
+  && apt-get clean \
+  && rm -Rf /var/lib/apt/lists/*
 
 USER node
 WORKDIR /opt
@@ -35,13 +42,14 @@ RUN  /bin/bash -l /opt/install-meteor.sh \
 #RUN  /bin/bash -c -l "reaction test"
 
 USER root
-RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo
+#RUN SUDO_FORCE_REMOVE=yes apt remove -yqq sudo
 # RUN chown -R node:node /home/node
-USER node
+# USER node
 
-RUN mkdir -p /home/node/reaction
+RUN mkdir -p /home/node/reaction && chown node:node /home/node/reaction
 WORKDIR /home/node/reaction
 
 COPY assets /assets
 ENTRYPOINT [ "/assets/start" ]
+ENV STRACE_OPTS='-T -ttt -ff -o /tmp/strace/strace.out'
 CMD [ "reaction" ]

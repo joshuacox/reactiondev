@@ -19,7 +19,7 @@ clean() {
   docker rm `cat .reactiondev.cid`
   echo '..'
   rm -f .reactiondev.cid
-  ./scripts/rmdirs
+  sudo ./scripts/rmdirs
   echo  'clean....'
   echo  'Ready to run reactiondev'
 }

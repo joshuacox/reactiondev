@@ -15,14 +15,19 @@ run: clean .reactiondev.cid
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	$(eval TMP := $(shell mktemp -d --suffix=REACTION_TMP))
+	$(eval STRACE_OPTS := $(shell cat STRACE_OPTS))
 	@echo $(TMP) >> .tmplist
 	docker run --name reactiondev \
 		-d \
 		-p $(PORT):3000 \
 		--cidfile=.reactiondev.cid \
 		-e REACTION_ROOT=/home/node/reaction \
+		-e STRACE_OPTS=$(STRACE_OPTS) \
 		-v $(REACTION_ROOT):/home/node/reaction \
 		-v $(TMP):/tmp \
+		--cap-add SYS_PTRACE \
+		--security-opt seccomp:unconfined \
+		--privileged \
 		$(TAG)
 
 i:
