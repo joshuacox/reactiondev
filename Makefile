@@ -10,7 +10,7 @@ pull:
 
 run: clean .reactiondev.cid
 
-.reactiondev.cid: PORT REACTION_ROOT
+.reactiondev.cid: PORT REACTION_ROOT STRACE_OPTS
 	$(eval TAG := $(shell cat TAG))
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
@@ -105,6 +105,11 @@ clean:
 ps:
 	-@sleep 2
 	docker ps|grep reactiondev
+
+STRACE_OPTS:
+	@while [ -z "$$STRACE_OPTS" ]; do \
+		read -r -p "Enter the strace options you wish to associate with this container [STRACE_OPTS]: " STRACE_OPTS; echo "$$STRACE_OPTS">>STRACE_OPTS; cat STRACE_OPTS; \
+	done ;
 
 PORT:
 	@while [ -z "$$PORT" ]; do \
