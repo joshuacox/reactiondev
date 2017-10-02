@@ -2,7 +2,7 @@ FROM node:wheezy
 
 ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar' \
   REACTION_ROOT='/home/node/reaction' \
-  REACTIONDEV_UPDATED=20170925
+  REACTIONDEV_UPDATED=20171002
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
