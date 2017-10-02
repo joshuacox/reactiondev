@@ -1,6 +1,6 @@
 FROM node:latest
 
-ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar' \
+ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar strace' \
   REACTION_ROOT='/home/node/reaction' \
   REACTIONDEV_UPDATED=20170918
 
@@ -17,14 +17,6 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && gpasswd -a node sudo \
   && groupadd -g 991 docker \
   && gpasswd -a node docker \
-  && apt-get -y autoremove \
-  && apt-get clean \
-  && rm -Rf /var/lib/apt/lists/*
-
-RUN DEBIAN_FRONTEND=noninteractive \
-  && apt-get -qq update \
-  && apt-get -qqy --no-install-recommends install \
-     strace \
   && apt-get -y autoremove \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
