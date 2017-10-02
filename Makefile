@@ -1,3 +1,5 @@
+METEOR_VERSION=1.5.1
+
 all: run ps logs
 
 localbuild:
@@ -23,6 +25,7 @@ run: clean .reactiondev.cid
 		--cidfile=.reactiondev.cid \
 		-e REACTION_ROOT=/home/node/reaction \
 		-e STRACE_OPTS=$(STRACE_OPTS) \
+		-e METEOR_VERSION=$(METEOR_VERSION) \
 		-v $(REACTION_ROOT):/home/node/reaction \
 		-v $(TMP):/tmp \
 		--cap-add SYS_PTRACE \
@@ -176,5 +179,8 @@ fresh: PORT clean /tmp/reaction
 
 /tmp/reaction:
 	cd /tmp; git clone https://github.com/reactioncommerce/reaction.git
-	cd /tmp/reaction; meteor npm i
+	cp install-meteor.sh /tmp/reaction/
+	cd /tmp/reaction \
+	&& bash install-meteor.sh \
+	&& meteor npm i
 
