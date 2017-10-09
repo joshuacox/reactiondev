@@ -2,6 +2,7 @@ FROM node:stretch
 
 ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar' \
   REACTION_ROOT='/home/node/reaction' \
+  TOOL_NODE_FLAGS="--max-old-space-size=2048" \
   REACTIONDEV_UPDATED=20171009
 
 RUN DEBIAN_FRONTEND=noninteractive \
