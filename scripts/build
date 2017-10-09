@@ -3,9 +3,11 @@
 export REACTION_BUILD_NAME=$1
 make clean
 
-TAG=$(cat TAG)
-PORT=$(cat PORT)
-REACTION_ROOT=$(cat REACTION_ROOT)
+export BUILD_ARGS=${BUILD_ARGS:-$(cat BUILD_ARGS)}
+export REACTION_ROOT=${REACTION_ROOT:-$(cat REACTION_ROOT)}
+export TAG=${TAG:-$(cat TAG)}
+export PORT=${PORT:-$(cat PORT)}
+
 TMP=$(mktemp -d --suffix=REACTION_TMP)
 echo $TMP >> .tmplist
 
@@ -17,6 +19,6 @@ docker run --name reactiondev \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v $(which docker):/bin/docker \
   $TAG \
-  reaction build $REACTION_BUILD_NAME
+  reaction build $BUILD_ARGS $REACTION_BUILD_NAME
 
 ./scripts/push $REACTION_BUILD_NAME

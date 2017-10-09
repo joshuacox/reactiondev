@@ -10,9 +10,32 @@ pull:
 	$(eval TAG := $(shell cat TAG))
 	docker pull $(TAG)
 
-run: clean .reactiondev.cid
+run: .reactiondev.cid
 
-.reactiondev.cid: PORT REACTION_ROOT STRACE_OPTS
+.reactiondev.cid: clean PORT REACTION_ROOT STRACE_OPTS TOOL_NODE_FLAGS
+	$(eval TAG := $(shell cat TAG))
+	$(eval PORT := $(shell cat PORT))
+	$(eval TOOL_NODE_FLAGS := $(shell cat TOOL_NODE_FLAGS))
+	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
+	$(eval TMP := $(shell mktemp -d --suffix=REACTION_TMP))
+	$(eval STRACE_OPTS := $(shell cat STRACE_OPTS))
+	@echo $(TMP) >> .tmplist
+	docker run --name reactiondev \
+		-d \
+		-p $(PORT):3000 \
+		--cidfile=.reactiondev.cid \
+		-e REACTION_ROOT=/home/node/reaction \
+		-e STRACE_OPTS=$(STRACE_OPTS) \
+		-e TOOL_NODE_FLAGS=$(TOOL_NODE_FLAGS) \
+		-e METEOR_VERSION=$(METEOR_VERSION) \
+		-v $(REACTION_ROOT):/home/node/reaction \
+		-v $(TMP):/tmp \
+		--cap-add SYS_PTRACE \
+		--security-opt seccomp:unconfined \
+		--privileged \
+		$(TAG)
+
+broken: clean PORT REACTION_ROOT STRACE_OPTS
 	$(eval TAG := $(shell cat TAG))
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
@@ -43,10 +66,11 @@ test:
 
 cmd: command logs clean
 
-command: PORT REACTION_ROOT clean
+command: PORT REACTION_ROOT clean TOOL_NODE_FLAGS
 	$(eval TAG := $(shell cat TAG))
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
+	$(eval TOOL_NODE_FLAGS := $(shell cat TOOL_NODE_FLAGS))
 	$(eval TMP := $(shell mktemp -d --suffix=REACTION_TMP))
 	@echo $(TMP) >> .tmplist
 	docker run --name reactiondev \
@@ -54,6 +78,7 @@ command: PORT REACTION_ROOT clean
 		-p $(PORT):3000 \
 		--cidfile=.reactiondev.cid \
 		-e REACTION_ROOT=/home/node/reaction \
+		-e TOOL_NODE_FLAGS=$(TOOL_NODE_FLAGS) \
 		-v $(REACTION_ROOT):/home/node/reaction \
 		-v $(TMP):/tmp \
 		$(TAG) \
@@ -72,9 +97,10 @@ ls:
 
 tag: tagged logs
 
-tagged: PORT REACTION_ROOT clean
+tagged: PORT REACTION_ROOT clean TOOL_NODE_FLAGS
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
+	$(eval TOOL_NODE_FLAGS := $(shell cat TOOL_NODE_FLAGS))
 	$(eval TMP := $(shell mktemp -d --suffix=REACTION_TMP))
 	@echo $(TMP) >> .tmplist
 	docker run --name reactiondev \
@@ -82,6 +108,7 @@ tagged: PORT REACTION_ROOT clean
 		-p $(PORT):3000 \
 		--cidfile=.reactiondev.cid \
 		-e REACTION_ROOT=/home/node/reaction \
+		-e TOOL_NODE_FLAGS=$(TOOL_NODE_FLAGS) \
 		-v $(REACTION_ROOT):/home/node/reaction \
 		-v $(TMP):/tmp \
 		$(TAG)
@@ -89,9 +116,11 @@ tagged: PORT REACTION_ROOT clean
 demo:
 	PORT=3100 TAG="joshuacox/reactiondev:demo" make demod
 
-demod:
+demod: TOOL_NODE_FLAGS
+	$(eval TOOL_NODE_FLAGS := $(shell cat TOOL_NODE_FLAGS))
 	docker run -d \
 		-p $(PORT):3000 \
+		-e TOOL_NODE_FLAGS=$(TOOL_NODE_FLAGS) \
 		$(TAG)
 
 enter:
@@ -175,12 +204,15 @@ install-meteor.sh:
 
 fresh: PORT clean /tmp/reaction
 	echo '/tmp/reaction' > REACTION_ROOT
+	make i
 	make
 
 /tmp/reaction:
 	cd /tmp; git clone https://github.com/reactioncommerce/reaction.git
-	cp install-meteor.sh /tmp/reaction/
-	cd /tmp/reaction \
-	&& bash install-meteor.sh \
-	&& meteor npm i
 
+BUILD_ARGS: TOOL_NODE_FLAGS
+	$(eval TOOL_NODE_FLAGS := $(shell cat TOOL_NODE_FLAGS))
+	echo '--build-arg TOOL_NODE_FLAGS=$(TOOL_NODE_FLAGS)' > BUILD_ARGS
+
+TOOL_NODE_FLAGS:
+	echo '"--max-old-space-size=2048"' > TOOL_NODE_FLAGS
