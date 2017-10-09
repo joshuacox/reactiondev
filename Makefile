@@ -10,10 +10,9 @@ pull:
 
 run: clean .reactiondev.cid
 
-.reactiondev.cid: PORT REACTION_ROOT BUILD_ARGS TOOL_NODE_FLAGS
+.reactiondev.cid: PORT REACTION_ROOT TOOL_NODE_FLAGS
 	$(eval TAG := $(shell cat TAG))
 	$(eval PORT := $(shell cat PORT))
-	$(eval BUILD_ARGS := $(shell cat BUILD_ARGS))
 	$(eval TOOL_NODE_FLAGS := $(shell cat TOOL_NODE_FLAGS))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	$(eval TMP := $(shell mktemp -d --suffix=REACTION_TMP))
@@ -38,12 +37,11 @@ test:
 
 cmd: command logs clean
 
-command: PORT REACTION_ROOT clean BUILD_ARGS TOOL_NODE_FLAGS
+command: PORT REACTION_ROOT clean TOOL_NODE_FLAGS
 	$(eval TAG := $(shell cat TAG))
 	$(eval PORT := $(shell cat PORT))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	$(eval TOOL_NODE_FLAGS := $(shell cat TOOL_NODE_FLAGS))
-	$(eval BUILD_ARGS := $(shell cat BUILD_ARGS))
 	$(eval TMP := $(shell mktemp -d --suffix=REACTION_TMP))
 	@echo $(TMP) >> .tmplist
 	docker run --name reactiondev \
@@ -72,7 +70,6 @@ tag: tagged logs
 
 tagged: PORT REACTION_ROOT clean TOOL_NODE_FLAGS
 	$(eval PORT := $(shell cat PORT))
-	$(eval BUILD_ARGS := $(shell cat BUILD_ARGS))
 	$(eval REACTION_ROOT := $(shell cat REACTION_ROOT))
 	$(eval TOOL_NODE_FLAGS := $(shell cat TOOL_NODE_FLAGS))
 	$(eval TMP := $(shell mktemp -d --suffix=REACTION_TMP))
