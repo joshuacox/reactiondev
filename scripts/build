@@ -19,6 +19,6 @@ docker run --name reactiondev \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v $(which docker):/bin/docker \
   $TAG \
-  reaction build $BUILD_ARGS $REACTION_BUILD_NAME
+  docker build $BUILD_ARGS -t $REACTION_BUILD_NAME .
 
 ./scripts/push $REACTION_BUILD_NAME
