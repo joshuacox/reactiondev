@@ -29,7 +29,7 @@ COPY install-meteor.sh /opt/install-meteor.sh
 RUN  /bin/bash -l /opt/install-meteor.sh \
   && /bin/bash -c -l "sudo npm i -g reaction-cli"
 
-ENV REACTION_BRANCH='master' \
+ENV REACTION_BRANCH='1.5.0' \
   REACTION_EMAIL="admin@example.com" \
   REACTION_USER="admin" \
   REACTION_AUTH="p@ssw0rd"
