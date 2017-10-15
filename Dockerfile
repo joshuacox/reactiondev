@@ -26,7 +26,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 USER node
 WORKDIR /opt
 
-ENV METEOR_VERSION 1.5.1
+ENV METEOR_VERSION 1.5.2.2
 COPY install-meteor.sh /opt/install-meteor.sh
 RUN  /bin/bash -l /opt/install-meteor.sh \
   && /bin/bash -c -l "sudo npm i -g reaction-cli"
