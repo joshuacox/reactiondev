@@ -10,6 +10,8 @@ export PORT=${PORT:-$(cat PORT)}
 
 TMP=$(mktemp -d --suffix=REACTION_TMP)
 echo $TMP >> .tmplist
+echo docker build $BUILD_ARGS -t $REACTION_BUILD_NAME . > $TMP/build.sh
+chmod +x $TMP/build.sh
 
 docker run --name reactiondev \
   --cidfile=.reactiondev.cid \
@@ -19,6 +21,6 @@ docker run --name reactiondev \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v $(which docker):/bin/docker \
   $TAG \
-  docker build $BUILD_ARGS -t $REACTION_BUILD_NAME .
+  /tmp/build.sh
 
 ./scripts/push $REACTION_BUILD_NAME

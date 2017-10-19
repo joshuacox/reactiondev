@@ -46,7 +46,6 @@ command: PORT REACTION_ROOT clean TOOL_NODE_FLAGS
 	@echo $(TMP) >> .tmplist
 	docker run --name reactiondev \
 		-d \
-		-p $(PORT):3000 \
 		--cidfile=.reactiondev.cid \
 		-e REACTION_ROOT=/home/node/reaction \
 		-e TOOL_NODE_FLAGS=$(TOOL_NODE_FLAGS) \
@@ -181,4 +180,4 @@ BUILD_ARGS: TOOL_NODE_FLAGS
 	echo '--build-arg TOOL_NODE_FLAGS=$(TOOL_NODE_FLAGS)' > BUILD_ARGS
 
 TOOL_NODE_FLAGS:
-	echo '"--max-old-space-size=2048"' > TOOL_NODE_FLAGS
+	echo '"--max-old-space-size=4096"' > TOOL_NODE_FLAGS
