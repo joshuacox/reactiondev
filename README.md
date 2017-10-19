@@ -115,6 +115,21 @@ docker run --name reactiondevdemo -d \
   joshuacox/reactiondev:node-slim
 ```
 
+### Special Branches
+
+```
+strace
+```
+
+strace will allow you to strace the whole reaction process, you will be
+prompted for strace options beforehand the example is (include the
+quotes):
+
+
+```
+'-T -ttt -ff -o /tmp/strace/strace.out'
+```
+
 ---
 
 ### Environment variables
