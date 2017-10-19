@@ -1,0 +1,27 @@
+#!/bin/bash
+# Stops and removes previously running reactiondev containers
+
+# Main
+main() {
+	if [  -f ".reactiondev.cid" ]; then
+    clean
+  else
+    echo "No previous reactiondev container to clean"
+	fi
+}
+
+clean() {
+  echo -n 'Stopping and Removing any running reactiondev containers..'
+  touch .reactiondev.cid
+  docker stop `cat .reactiondev.cid`
+  #docker kill `cat .reactiondev.cid`
+  echo -n '..'
+  docker rm `cat .reactiondev.cid`
+  echo '..'
+  rm -f .reactiondev.cid
+  ./scripts/rmdirs
+  echo  'clean....'
+  echo  'Ready to run reactiondev'
+}
+
+main "$@"
