@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ "$#" -ne 1 ]; then
+      echo "Illegal number of parameters"
+fi
+
 echo "REACTION_ROOT='$REACTION_ROOT'"
 
 cd $REACTION_ROOT
