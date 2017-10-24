@@ -18,14 +18,22 @@ there is a symlink above try
 ./cmd reaction test
 ```
 
-ought to be equivalent to the `make test` command
+The above ought to be equivalent to the `make test` command
+
+### build
+
+```
+./build mycustom
+```
+
+will result in reaction build mycustom
 
 ### demo
 
 No symlink yet for this one so let's call it like the Makefile does
 
 ```
-./scripts/demo joshuacox/reactiondev:marketplace 3101
+./scripts/demo joshuacox/reactiondev:demo 3101
 ```
 
 ### tagged
