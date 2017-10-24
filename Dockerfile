@@ -3,7 +3,7 @@ FROM node:8
 ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar' \
   REACTION_ROOT='/home/node/reaction' \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
-  REACTIONDEV_UPDATED=20171019
+  REACTIONDEV_UPDATED=20171024
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
@@ -29,7 +29,7 @@ WORKDIR /opt
 ENV METEOR_VERSION 1.5.2.2
 COPY install-meteor.sh /opt/install-meteor.sh
 RUN  /bin/bash -l /opt/install-meteor.sh \
-  && /bin/bash -c -l "sudo npm i -g reaction-cli"
+  && /bin/bash -c -l "sudo npm i -g reaction-cli bcrypt"
 #RUN  /bin/bash -c -l "reaction init"
 #RUN rm -Rf /opt/reaction
 #WORKDIR /opt/reaction

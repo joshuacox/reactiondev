@@ -1,7 +1,11 @@
 #!/bin/bash
 
 echo "REACTION_ROOT='$REACTION_ROOT'"
-
 cd $REACTION_ROOT
+pwd
 
-$@
+if [ "$#" -ne 0 ]; then
+  /assets/docker-entrypoint.sh $@
+else
+  /assets/docker-entrypoint.sh sh
+fi
