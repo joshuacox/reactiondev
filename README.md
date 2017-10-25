@@ -76,6 +76,8 @@ particular verison of Reaction Commerce and the marketplace, merely do a
 `reaction init -b TAG` when building
 
 ```
+v1.5.4
+v1.5.3
 v1.5.2
 v1.5.1
 v1.5.0
@@ -100,9 +102,7 @@ Also available in dockerhub as tags, I have a few branches that relate to the
 alpine, different node versions, and experimental builds, notably:
 
 ```
-alpine
 node-8
-node-8.4
 node-boron
 node-argon
 node-slim
@@ -141,7 +141,7 @@ quotes):
 
 `REACTION_ROOT`  inside the container this by default will point to
 `/home/node/reaction` you can point it to whereever you want and change
-your corresponding volume mount e.g. 
+your corresponding volume mount e.g.
 
 ```sh
 docker run --name reactiondev -d \
