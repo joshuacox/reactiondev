@@ -184,3 +184,4 @@ TOOL_NODE_FLAGS:
 
 docker-entrypoint.sh:
 	wget -c https://raw.githubusercontent.com/docker-library/docker/62a456489acfe7443d426cd502ccf22130d1ccf9/17.10/docker-entrypoint.sh
+	chmod +x docker-entrypoint.sh
