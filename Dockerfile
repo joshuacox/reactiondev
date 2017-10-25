@@ -14,15 +14,14 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && echo 'en_US ISO-8859-1'>>/etc/locale.gen \
   && echo 'en_US.UTF-8 UTF-8'>>/etc/locale.gen \
   && locale-gen \
+  && curl https://raw.githubusercontent.com/joshuacox/roustabout/master/DebianDockerInstall|bash \
   && echo '%sudo ALL=(ALL) NOPASSWD:ALL'>> /etc/sudoers \
   && chown -R node:node /opt \
   && gpasswd -a node sudo \
-  && groupadd -g 991 docker \
   && gpasswd -a node docker \
   && apt-get -y autoremove \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
-
 
 USER node
 WORKDIR /opt
