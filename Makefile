@@ -183,4 +183,4 @@ TOOL_NODE_FLAGS:
 	echo '"--max-old-space-size=4096"' > TOOL_NODE_FLAGS
 
 docker-entrypoint.sh:
-	wget -c https://github.com/docker-library/docker/blob/62a456489acfe7443d426cd502ccf22130d1ccf9/17.10/docker-entrypoint.sh
+	wget -c https://raw.githubusercontent.com/docker-library/docker/62a456489acfe7443d426cd502ccf22130d1ccf9/17.10/docker-entrypoint.sh
