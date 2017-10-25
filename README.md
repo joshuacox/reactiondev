@@ -86,7 +86,6 @@ v1.4.2
 v1.4.1
 v1.4.0
 v1.3.0
-marketplace
 ```
 
 example:
@@ -236,7 +235,6 @@ and the demos
 make v141
 make v140
 make v130
-make marketplace
 ```
 
 ---
