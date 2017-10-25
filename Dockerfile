@@ -44,6 +44,7 @@ USER node
 RUN mkdir -p /home/node/reaction
 WORKDIR /home/node/reaction
 
+COPY docker-entrypoint.sh /usr/local/bin/
 COPY assets /assets
 ENTRYPOINT [ "/assets/start" ]
 CMD [ "reaction" ]

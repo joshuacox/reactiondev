@@ -9,14 +9,14 @@ main() {
     cd $REACTION_ROOT
     pwd
     ls
-    echo "passing $@"
-    echo "to docker-entrypoint.sh"
+    echo "passing '$@' to docker-entrypoint.sh"
   fi
 
-  if [ "$#" -ne 0 ]; then
-    /assets/docker-entrypoint.sh $@
+  if [[ "$#" -gt 0 ]]
+  then
+    docker-entrypoint.sh "$@"
   else
-    /assets/docker-entrypoint.sh sh
+    docker-entrypoint.sh "sh"
   fi
 }
 
