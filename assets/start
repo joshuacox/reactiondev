@@ -3,9 +3,15 @@ set -e
 
 # Main
 main() {
-  echo "REACTION_ROOT='$REACTION_ROOT'"
-  cd $REACTION_ROOT
-  pwd
+  if [[ "$VERBOSITY" -gt "0" ]]
+  then
+    echo "REACTION_ROOT='$REACTION_ROOT'"
+    cd $REACTION_ROOT
+    pwd
+    ls
+    echo "passing $@"
+    echo "to docker-entrypoint.sh"
+  fi
 
   if [ "$#" -ne 0 ]; then
     /assets/docker-entrypoint.sh $@
