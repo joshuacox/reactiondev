@@ -4,3 +4,4 @@ export REACTION_BUILD_NAME=$1
 
 ./scripts/build $REACTION_BUILD_NAME
 ./scripts/push $REACTION_BUILD_NAME
+
