@@ -35,6 +35,8 @@ t: test
 test:
 	./scripts/cmd reaction test
 
+try: .reactiontry.cid
+
 cmd: command logs clean
 
 command: PORT REACTION_ROOT clean TOOL_NODE_FLAGS
@@ -93,6 +95,27 @@ demod: TOOL_NODE_FLAGS
 		-e TOOL_NODE_FLAGS=$(TOOL_NODE_FLAGS) \
 		$(TAG)
 
+.reactiontry.cid: clean PORT TRY .mongotry.cid
+	$(eval TRY := $(shell cat TRY))
+	$(eval PORT := $(shell cat PORT))
+	docker run --name reactiontry \
+		-d \
+		--link mongotry:mongo \
+		-p $(PORT):3000 \
+		-e MONGO_URL='mongodb://mongo/test' \
+		-e REACTION_AUTH='test' \
+		-e REACTION_USER='test' \
+		-e REACTION_EMAIL='test@test.com' \
+		--cidfile=.reactiondev.cid \
+		$(TRY)
+
+.mongotry.cid:
+	$(eval TRY := $(shell cat TRY))
+	docker run --name mongotry \
+		-d \
+		--cidfile=.mongotry.cid \
+	  mongo:latest
+
 enter:
 	docker exec -it \
 		`cat .reactiondev.cid` \
@@ -107,6 +130,11 @@ clean:
 ps:
 	-@sleep 2
 	docker ps|grep reactiondev
+
+TRY:
+	@while [ -z "$$TRY" ]; do \
+		read -r -p "Enter the tag you wish to try [TRY]: " TRY; echo "$$TRY">>TRY; cat TRY; \
+	done ;
 
 PORT:
 	@while [ -z "$$PORT" ]; do \
