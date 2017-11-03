@@ -1,5 +1,6 @@
 .reactiondev.cid
 PORT
+TRY
 REACTION_ROOT
 .tmplist
 STRACE_OPTS
