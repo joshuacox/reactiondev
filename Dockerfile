@@ -24,12 +24,12 @@ RUN DEBIAN_FRONTEND=noninteractive \
 USER node
 WORKDIR /home/node
 
-ENV METEOR_VERSION 1.5.2.2
+ENV METEOR_VERSION 1.6
 COPY install-meteor.sh /opt/install-meteor.sh
 RUN  /bin/bash -l /opt/install-meteor.sh \
   && /bin/bash -c -l "sudo npm i -g reaction-cli"
 
-ENV REACTION_BRANCH='v1.5.5' \
+ENV REACTION_BRANCH='v1.5.6' \
   REACTION_EMAIL="admin@example.com" \
   REACTION_USER="admin" \
   REACTION_AUTH="p@ssw0rd"
