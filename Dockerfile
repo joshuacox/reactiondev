@@ -3,7 +3,7 @@ FROM node:stretch
 ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar' \
   REACTION_ROOT='/home/node/reaction' \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
-  REACTIONDEV_UPDATED=20171019
+  REACTIONDEV_UPDATED=20171112
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
