@@ -76,6 +76,8 @@ particular verison of Reaction Commerce and the marketplace, merely do a
 `reaction init -b TAG` when building
 
 ```
+v1.5.2
+v1.5.1
 v1.5.0
 v1.4.3
 v1.4.2
