@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:8
 
 ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar' \
   REACTION_ROOT='/home/node/reaction' \
