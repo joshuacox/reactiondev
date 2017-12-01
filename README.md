@@ -76,6 +76,11 @@ particular verison of Reaction Commerce and the marketplace, merely do a
 `reaction init -b TAG` when building
 
 ```
+v1.5.2
+v1.5.1
+v1.5.0
+v1.4.3
+v1.4.2
 v1.4.1
 v1.4.0
 v1.3.0
@@ -113,6 +118,21 @@ docker run --name reactiondevdemo -d \
   -p 3001:3000 \
   -v $(REACTION_ROOT):/home/node/reaction \
   joshuacox/reactiondev:node-slim
+```
+
+### Special Branches
+
+```
+strace
+```
+
+strace will allow you to strace the whole reaction process, you will be
+prompted for strace options beforehand the example is (include the
+quotes):
+
+
+```
+'-T -ttt -ff -o /tmp/strace/strace.out'
 ```
 
 ---
@@ -194,6 +214,9 @@ will be blown away when they are stopped) caution this will download
 many demos at once and run them all on ports above 3100!
 
 `make localbuild` to build the reactiondev image locally it
+
+`make fresh` will clone a fresh copy of reaction into tmp and build from
+there
 
 there are also various branches you can test easily with the makefile:
 
