@@ -3,7 +3,7 @@ FROM node:latest
 ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar strace' \
   REACTION_ROOT='/home/node/reaction' \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
-  REACTIONDEV_UPDATED=20171129
+  REACTIONDEV_UPDATED=20171130
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
@@ -25,7 +25,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 USER node
 WORKDIR /opt
 
-ENV METEOR_VERSION 1.5.2.2
+ENV METEOR_VERSION 1.6.0
 COPY install-meteor.sh /opt/install-meteor.sh
 RUN  /bin/bash -l /opt/install-meteor.sh \
   && /bin/bash -c -l "sudo npm i -g reaction-cli"
