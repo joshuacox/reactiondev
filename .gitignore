@@ -1,4 +1,5 @@
 .reactiondev.cid
+.mongotry.cid
 PORT
 REACTION_ROOT
 .tmplist
@@ -6,3 +7,4 @@ STRACE_OPTS
 REACTION_BUILD_NAME
 BUILD_ARGS
 TOOL_NODE_FLAGS
+TRY

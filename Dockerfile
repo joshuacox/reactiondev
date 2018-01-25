@@ -2,8 +2,9 @@ FROM node:latest
 
 ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar strace' \
   REACTION_ROOT='/home/node/reaction' \
+  VERBOSITY=1 \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
-  REACTIONDEV_UPDATED=20170919
+  REACTIONDEV_UPDATED=20180124
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
@@ -22,10 +23,11 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
 
+
 USER node
 WORKDIR /opt
 
-ENV METEOR_VERSION 1.5.2.2
+ENV METEOR_VERSION 1.6.0.1
 COPY install-meteor.sh /opt/install-meteor.sh
 RUN  /bin/bash -l /opt/install-meteor.sh \
   && /bin/bash -c -l "sudo npm i -g reaction-cli"
@@ -42,6 +44,7 @@ USER root
 RUN mkdir -p /home/node/reaction && chown node:node /home/node/reaction
 WORKDIR /home/node/reaction
 
+COPY docker-entrypoint.sh /usr/local/bin/
 COPY assets /assets
 ENTRYPOINT [ "/assets/start" ]
 ENV STRACE_OPTS='-T -ttt -ff -o /tmp/strace/strace.out'

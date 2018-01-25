@@ -1,13 +1,22 @@
 #!/bin/bash
+set -e
 
+# Main
+main() {
 mkdir -p /tmp/strace
 
-echo "REACTION_ROOT='$REACTION_ROOT'"
+  if [[ "$VERBOSITY" -gt "0" ]]
+  then
+    echo "REACTION_ROOT='$REACTION_ROOT'"
+    cd $REACTION_ROOT
+    echo -n "pwd -> "
+    pwd
+    echo "passing '$@' to docker-entrypoint.sh"
+  fi
 
-cd $REACTION_ROOT
-echo -n "pwd -> "
-pwd
+  echo -n "running this strace --> "
+  echo "strace $STRACE_OPTS sudo -u node $@"
+  strace $STRACE_OPTS sudo -u node $@
+}
 
-echo -n "running this strace --> "
-echo "strace $STRACE_OPTS sudo -u node $@"
-strace $STRACE_OPTS sudo -u node $@
+main "$@"

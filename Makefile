@@ -43,6 +43,8 @@ t: test
 test:
 	./scripts/cmd reaction test
 
+try: .reactiontry.cid
+
 cmd: command logs clean
 
 command: PORT REACTION_ROOT clean TOOL_NODE_FLAGS
@@ -54,7 +56,6 @@ command: PORT REACTION_ROOT clean TOOL_NODE_FLAGS
 	@echo $(TMP) >> .tmplist
 	docker run --name reactiondev \
 		-d \
-		-p $(PORT):3000 \
 		--cidfile=.reactiondev.cid \
 		-e REACTION_ROOT=/home/node/reaction \
 		-e TOOL_NODE_FLAGS=$(TOOL_NODE_FLAGS) \
@@ -102,6 +103,27 @@ demod: TOOL_NODE_FLAGS
 		-e TOOL_NODE_FLAGS=$(TOOL_NODE_FLAGS) \
 		$(TAG)
 
+.reactiontry.cid: clean PORT TRY .mongotry.cid
+	$(eval TRY := $(shell cat TRY))
+	$(eval PORT := $(shell cat PORT))
+	docker run --name reactiontry \
+		-d \
+		--link mongotry:mongo \
+		-p $(PORT):3000 \
+		-e MONGO_URL='mongodb://mongo/test' \
+		-e REACTION_AUTH='test' \
+		-e REACTION_USER='test' \
+		-e REACTION_EMAIL='test@test.com' \
+		--cidfile=.reactiondev.cid \
+		$(TRY)
+
+.mongotry.cid:
+	$(eval TRY := $(shell cat TRY))
+	docker run --name mongotry \
+		-d \
+		--cidfile=.mongotry.cid \
+	  mongo:latest
+
 enter:
 	docker exec -it \
 		`cat .reactiondev.cid` \
@@ -120,6 +142,11 @@ ps:
 STRACE_OPTS:
 	@while [ -z "$$STRACE_OPTS" ]; do \
 		read -r -p "Enter the strace options you wish to associate with this container [STRACE_OPTS]: " STRACE_OPTS; echo "$$STRACE_OPTS">>STRACE_OPTS; cat STRACE_OPTS; \
+	done ;
+
+TRY:
+	@while [ -z "$$TRY" ]; do \
+		read -r -p "Enter the tag you wish to try [TRY]: " TRY; echo "$$TRY">>TRY; cat TRY; \
 	done ;
 
 PORT:
@@ -195,3 +222,7 @@ BUILD_ARGS: TOOL_NODE_FLAGS
 
 TOOL_NODE_FLAGS:
 	echo '"--max-old-space-size=4096"' > TOOL_NODE_FLAGS
+
+docker-entrypoint.sh:
+	wget -c https://raw.githubusercontent.com/docker-library/docker/62a456489acfe7443d426cd502ccf22130d1ccf9/17.10/docker-entrypoint.sh
+	chmod +x docker-entrypoint.sh

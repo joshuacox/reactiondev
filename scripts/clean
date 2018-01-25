@@ -8,20 +8,33 @@ main() {
   else
     echo "No previous reactiondev container to clean"
 	fi
+	if [  -f ".mongotry.cid" ]; then
+    mongoclean
+	fi
 }
 
 clean() {
   echo -n 'Stopping and Removing any running reactiondev containers..'
   touch .reactiondev.cid
   docker stop `cat .reactiondev.cid`
+  docker stop `cat .mongotry.cid`
   #docker kill `cat .reactiondev.cid`
   echo -n '..'
   docker rm `cat .reactiondev.cid`
+  docker rm `cat .mongotry.cid`
   echo '..'
   rm -f .reactiondev.cid
-  sudo ./scripts/rmdirs
+  rm -f .mongotry.cid
+  ./scripts/rmdirs
   echo  'clean....'
   echo  'Ready to run reactiondev'
+}
+mongoclean() {
+  echo  'cleaning mongo....'
+  docker stop `cat .mongotry.cid`
+  docker rm `cat .mongotry.cid`
+  rm -f .mongotry.cid
+  echo  'mongo clean....'
 }
 
 main "$@"
