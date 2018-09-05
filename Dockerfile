@@ -4,7 +4,11 @@ ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar' \
   REACTION_ROOT='/home/node/reaction' \
   VERBOSITY=1 \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
-  REACTIONDEV_UPDATED=20180829
+<<<<<<< HEAD
+  REACTIONDEV_UPDATED=20180905
+=======
+  REACTIONDEV_UPDATED=20180905
+>>>>>>> 40af553b7f3797e22efcc5f12bc345017d558675
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
