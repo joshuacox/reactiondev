@@ -4,7 +4,7 @@ ENV BUILD_PACKAGES='git wget curl locales sudo bsdtar strace' \
   REACTION_ROOT='/home/node/reaction' \
   VERBOSITY=1 \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
-  REACTIONDEV_UPDATED=20181024
+  REACTIONDEV_UPDATED=20181031
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
